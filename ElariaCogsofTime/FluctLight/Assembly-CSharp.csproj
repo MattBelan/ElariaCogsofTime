@@ -68,43 +68,43 @@
      <Compile Include="Assets\Scripts\SaveScript.cs" />
      <Compile Include="Assets\Scripts\TileScript.cs" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-weaver.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -292,20 +292,14 @@
  <Reference Include="Vuforia.UnityExtensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>Z:/IGMProfile/Desktop/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>E:/Work/Repos/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
