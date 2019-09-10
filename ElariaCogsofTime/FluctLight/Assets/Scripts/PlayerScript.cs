@@ -222,4 +222,9 @@ public class PlayerScript : MonoBehaviour {
 
         return animation;
     }
+
+    public void FindPath(Vector3 start, Vector3 end)
+    {
+
+    }
 }

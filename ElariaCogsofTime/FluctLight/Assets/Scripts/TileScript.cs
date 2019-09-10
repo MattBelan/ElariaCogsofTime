@@ -19,7 +19,7 @@ public class TileScript : MonoBehaviour {
 	void Start () {
         Destroy(this.GetComponent<MeshFilter>());
         Destroy(this.GetComponent<MeshRenderer>());
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

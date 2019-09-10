@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\HighlightScript.cs" />
      <Compile Include="Assets\Scripts\InteractibleScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
+     <Compile Include="Assets\Scripts\MovementGridScript.cs" />
      <Compile Include="Assets\Scripts\OverworldPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\SaveData.cs" />
