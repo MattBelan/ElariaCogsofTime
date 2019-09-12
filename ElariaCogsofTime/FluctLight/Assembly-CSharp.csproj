@@ -59,7 +59,9 @@
      <Compile Include="Assets\Scripts\CombatManager.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\GridVertex.cs" />
      <Compile Include="Assets\Scripts\HighlightScript.cs" />
+     <Compile Include="Assets\Scripts\Interactible.cs" />
      <Compile Include="Assets\Scripts\InteractibleScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\MovementGridScript.cs" />

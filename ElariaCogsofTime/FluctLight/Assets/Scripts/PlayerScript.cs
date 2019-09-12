@@ -49,6 +49,9 @@ public class PlayerScript : MonoBehaviour {
     //Pausing
     public bool playing;
 
+    //Pathfinding
+    public MovementGridScript grid;
+
     // Use this for initialization
     void Start () {
         currentMove = 0;
@@ -154,13 +157,21 @@ public class PlayerScript : MonoBehaviour {
                             Vector3 newPos = tile.transform.position;
                             newPos.z = -1;
 
+                            //Console Output of pathfinding testing
+                            List<GridVertex> path = grid.FindPath(transform.position, newPos, moveTotal);
+                            Debug.Log("path size: " + path.Count);
+                            foreach(GridVertex vert in path)
+                            {
+                                Debug.Log(vert.vertPos);
+                            }
+                            //end pathfinding testing
+
                             lerpTo = newPos;
                             LerpStart = true;
 
                             currentTile.GetComponent<TileScript>().onTile = null;
                             tile.onTile = gameObject;
                             currentTile = tile.gameObject;
-                            Debug.Log(currentMove);
                             currentMove += Mathf.Floor(dist);
 
                             Moving = false;

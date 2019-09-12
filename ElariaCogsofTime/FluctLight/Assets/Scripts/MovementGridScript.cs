@@ -5,11 +5,14 @@ using UnityEngine;
 public class MovementGridScript : MonoBehaviour
 {
 
-    public List<GameObject> tiles;
+    public List<GridVertex> verts;
+    GridVertex startVert;
+    GridVertex endVert;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetAdjacencies();
     }
 
     // Update is called once per frame
@@ -18,26 +21,72 @@ public class MovementGridScript : MonoBehaviour
         
     }
 
-    /*
-    public void FindPath(GameObject start, GameObject end)
+    void SetAdjacencies()
     {
-        List<GameObject> path = new List<GameObject>();
-
-        for (int i = 0; i < tiles.Count; i++)
+        foreach (GridVertex vert in verts)
         {
-            float distX = Mathf.abs(start.position.x - tiles[i].position.x);
-            float distY = Mathf.abs(start.position.y - tiles[i].position.y);
-
-            if(distX<=1 && distY <= 1)
+            foreach(GridVertex posAdj in verts)
             {
-                if(Vector3.Distance(tiles[i].position,end.position) < Vector3.Distance(start.position, end.position))
+                if(Vector3.Distance(vert.vertPos,posAdj.vertPos)<=1 && vert != posAdj)
                 {
-                    path.Add(tiles[i]);
+                    vert.adjVertices.Add(posAdj);
                 }
             }
         }
-
-        
     }
-    */
+
+    public List<GridVertex> FindPath(Vector3 start, Vector3 end, float moves)
+    {
+        List<GridVertex> path = new List<GridVertex>();
+        start.z = 0;
+        end.z = 0;
+
+        //setting starting and ending vertices
+        foreach(GridVertex vert in verts)
+        {
+            vert.visited = false;
+
+            if(vert.vertPos == start)
+            {
+                startVert = vert;
+                path.Add(startVert);
+            }
+            else if(vert.vertPos == end)
+            {
+                endVert = vert;
+            }
+        }
+
+        while (path.Count>0)
+        {
+            GridVertex curVert = path[path.Count - 1];
+            bool add = false;
+            
+            //checking if path is complete
+            if(curVert = endVert)
+            {
+                break;
+            }
+
+            if (curVert.adjVertices.Count > 0)
+            {
+                foreach(GridVertex adj in curVert.adjVertices)
+                {
+                    if (!adj.visited)
+                    {
+                        adj.visited = true;
+                        path.Add(adj);
+                        add = true;
+                    }
+                }
+            }
+
+            if (!add)
+            {
+                path.RemoveAt(path.Count - 1);
+            }
+        }
+
+        return path;
+    }
 }
