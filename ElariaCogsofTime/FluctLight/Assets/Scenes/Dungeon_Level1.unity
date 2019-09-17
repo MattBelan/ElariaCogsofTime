@@ -5663,6 +5663,7 @@ MonoBehaviour:
     z: 0
     currentLevel: 0
   animator: {fileID: 732316783}
+  grid: {fileID: 1980965602}
 --- !u!65 &732316785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10803,6 +10804,7 @@ MonoBehaviour:
     z: 0
     currentLevel: 0
   animator: {fileID: 1289651420}
+  grid: {fileID: 1980965602}
 --- !u!65 &1289651422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12783,6 +12785,7 @@ MonoBehaviour:
     z: 0
     currentLevel: 0
   animator: {fileID: 1508674290}
+  grid: {fileID: 1980965602}
 --- !u!65 &1508674292
 BoxCollider:
   m_ObjectHideFlags: 0

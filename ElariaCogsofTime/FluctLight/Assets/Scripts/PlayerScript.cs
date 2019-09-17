@@ -51,6 +51,11 @@ public class PlayerScript : MonoBehaviour {
 
     //Pathfinding
     public MovementGridScript grid;
+    Vector3 currGridTarget;
+    Vector3 endingTarget;
+    List<GridVertex> path;
+    int pathProgress;
+    Vector3 lerpEnd;
 
     // Use this for initialization
     void Start () {
@@ -87,7 +92,7 @@ public class PlayerScript : MonoBehaviour {
                 LerpStart = false;
                 IsLerping = true;
                 startTime = Time.time;
-                lerpLength = Vector3.Distance(transform.position, lerpTo);
+                lerpLength = Vector3.Distance(transform.position, lerpEnd);
 
                 animFloat = AnimationFloat(transform.position, lerpTo);
             }
@@ -97,9 +102,20 @@ public class PlayerScript : MonoBehaviour {
 
                 float fracLength = distCovered / lerpLength;
 
+                if(Vector3.Distance(transform.position, lerpTo) < 0.5)
+                {
+                    pathProgress++;
+                    if (pathProgress < path.Count)
+                    {
+                        lerpTo = path[pathProgress].vertPos;
+                        lerpTo.z = -1;
+                        animFloat = AnimationFloat(transform.position, lerpTo);
+                    }
+                }
+
                 transform.position = Vector3.Lerp(transform.position, lerpTo, fracLength);
 
-                if (transform.position == lerpTo)
+                if (transform.position == lerpEnd)
                 {
                     IsLerping = false;
                 }
@@ -157,16 +173,12 @@ public class PlayerScript : MonoBehaviour {
                             Vector3 newPos = tile.transform.position;
                             newPos.z = -1;
 
-                            //Console Output of pathfinding testing
-                            List<GridVertex> path = grid.FindPath(transform.position, newPos, moveTotal);
-                            Debug.Log("path size: " + path.Count);
-                            foreach(GridVertex vert in path)
-                            {
-                                Debug.Log(vert.vertPos);
-                            }
-                            //end pathfinding testing
+                            //Pathfinding testing
+                            path = grid.FindPath(transform.position, newPos, moveTotal);
 
-                            lerpTo = newPos;
+                            lerpTo = path[1].vertPos;
+                            lerpEnd = newPos;
+                            pathProgress = 1;
                             LerpStart = true;
 
                             currentTile.GetComponent<TileScript>().onTile = null;

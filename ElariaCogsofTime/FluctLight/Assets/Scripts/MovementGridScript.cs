@@ -41,6 +41,12 @@ public class MovementGridScript : MonoBehaviour
         start.z = 0;
         end.z = 0;
 
+        for (int i = 0; i < verts.Count; i++)
+        {
+            float newH = Mathf.Sqrt(Mathf.Pow(end.x - verts[i].vertPos.x, 2) + Mathf.Pow(end.y - verts[i].vertPos.y, 2));
+            verts[i].heuristic = newH;
+        }
+
         //setting starting and ending vertices
         foreach(GridVertex vert in verts)
         {
@@ -57,27 +63,37 @@ public class MovementGridScript : MonoBehaviour
             }
         }
 
+        int iteration = 0;
         while (path.Count>0)
         {
             GridVertex curVert = path[path.Count - 1];
             bool add = false;
-            
+            iteration++;
             //checking if path is complete
-            if(curVert = endVert)
+            if(curVert == endVert)
             {
+                Debug.Log(iteration + "st Round");
                 break;
             }
 
+            //checking nearby vertices
             if (curVert.adjVertices.Count > 0)
             {
+                GridVertex best = curVert.adjVertices[0];
+
                 foreach(GridVertex adj in curVert.adjVertices)
                 {
-                    if (!adj.visited)
+                    if (!adj.visited && adj.heuristic<=best.heuristic)
                     {
-                        adj.visited = true;
-                        path.Add(adj);
-                        add = true;
+                        best = adj;
                     }
+                }
+
+                if (!best.visited)
+                {
+                    best.visited = true;
+                    path.Add(best);
+                    add = true;
                 }
             }
 

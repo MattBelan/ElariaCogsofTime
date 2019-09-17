@@ -8,6 +8,7 @@ public class GridVertex : MonoBehaviour
     public Vector3 vertPos;
     public bool visited;
     public List<GridVertex> adjVertices;
+    public float heuristic;
 
     void Awake()
     {

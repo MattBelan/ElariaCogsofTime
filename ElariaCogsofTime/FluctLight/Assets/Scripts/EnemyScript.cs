@@ -33,6 +33,14 @@ public class EnemyScript : MonoBehaviour {
     public Animator animator;
     float animFloat;
 
+    //Pathfinding
+    public MovementGridScript grid;
+    Vector3 currGridTarget;
+    Vector3 endingTarget;
+    List<GridVertex> path;
+    int pathProgress;
+    Vector3 lerpEnd;
+
     // Use this for initialization
     void Start () {
         Health = 10;
@@ -68,7 +76,7 @@ public class EnemyScript : MonoBehaviour {
             LerpStart = false;
             IsLerping = true;
             startTime = Time.time;
-            lerpLength = Vector3.Distance(transform.position, lerpTo);
+            lerpLength = Vector3.Distance(transform.position, lerpEnd);
 
             animFloat = AnimationFloat(transform.position, lerpTo);
         }
@@ -77,6 +85,17 @@ public class EnemyScript : MonoBehaviour {
             float distCovered = (Time.time - startTime) * lerpSpeed;
 
             float fracLength = distCovered / lerpLength;
+
+            if (Vector3.Distance(transform.position, lerpTo) < 0.5)
+            {
+                pathProgress++;
+                if (pathProgress < path.Count)
+                {
+                    lerpTo = path[pathProgress].vertPos;
+                    lerpTo.z = -1;
+                    animFloat = AnimationFloat(transform.position, lerpTo);
+                }
+            }
 
             transform.position = Vector3.Lerp(transform.position, lerpTo, fracLength);
 
@@ -168,7 +187,11 @@ public class EnemyScript : MonoBehaviour {
                             Vector3 newPos = hit.collider.gameObject.transform.position;
                             newPos.z = -1;
 
-                            lerpTo = newPos;
+                            path = grid.FindPath(transform.position, newPos, moveTotal);
+
+                            lerpTo = path[1].vertPos;
+                            lerpEnd = newPos;
+                            pathProgress = 1;
                             LerpStart = true;
                         }
                     }
