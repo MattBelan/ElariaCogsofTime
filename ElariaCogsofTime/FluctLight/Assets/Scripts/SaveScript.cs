@@ -31,6 +31,8 @@ public class SaveScript : MonoBehaviour {
         playerData = player.data;
         if (enemies.Count > 0)
         {
+            enemyData.Clear();
+
             foreach(EnemyScript enemy in enemies)
             {
                 enemyData.Add(enemy.data);
