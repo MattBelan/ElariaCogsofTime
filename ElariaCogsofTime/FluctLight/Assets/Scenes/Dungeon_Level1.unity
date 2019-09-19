@@ -12560,6 +12560,7 @@ MonoBehaviour:
   selector: {fileID: 370832301}
   damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
     type: 3}
+  lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 8
   currentMove: 0
   attackDist: 2
