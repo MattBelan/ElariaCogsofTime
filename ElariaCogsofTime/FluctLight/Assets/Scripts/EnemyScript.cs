@@ -99,8 +99,9 @@ public class EnemyScript : MonoBehaviour {
 
             transform.position = Vector3.Lerp(transform.position, lerpTo, fracLength);
 
-            if (transform.position == lerpTo)
+            if (Vector3.Distance(transform.position, lerpEnd) <= .1)
             {
+                transform.position = lerpEnd;
                 IsLerping = false;
             }
 
@@ -176,23 +177,50 @@ public class EnemyScript : MonoBehaviour {
                     distToMove = moveTotal;
                 }
 
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position + distToMove * direction, new Vector3(0, 0, 1), out hit, 5.0f))
+                if (distToMove >= 1)
                 {
-                    TileScript tile = hit.collider.gameObject.GetComponent<TileScript>();
-                    if (tile != null)
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position + distToMove * direction, new Vector3(0, 0, 1), out hit, 5.0f))
                     {
-                        if (tile.onTile == null)
+                        TileScript tile = hit.collider.gameObject.GetComponent<TileScript>();
+                        if (tile != null)
                         {
-                            Vector3 newPos = hit.collider.gameObject.transform.position;
-                            newPos.z = -1;
+                            if (tile.onTile == null)
+                            {
+                                Vector3 newPos = hit.collider.gameObject.transform.position;
+                                newPos.z = -1;
 
-                            path = grid.FindPath(transform.position, newPos, moveTotal);
+                                path = grid.FindPath(transform.position, newPos, moveTotal);
 
-                            lerpTo = path[1].vertPos;
-                            lerpEnd = newPos;
-                            pathProgress = 1;
-                            LerpStart = true;
+                                lerpTo = path[1].vertPos;
+                                lerpTo.z = -1;
+                                lerpEnd = newPos;
+                                pathProgress = 1;
+                                LerpStart = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position + 1 * direction, new Vector3(0, 0, 1), out hit, 5.0f))
+                    {
+                        TileScript tile = hit.collider.gameObject.GetComponent<TileScript>();
+                        if (tile != null)
+                        {
+                            if (tile.onTile == null)
+                            {
+                                Vector3 newPos = hit.collider.gameObject.transform.position;
+                                newPos.z = -1;
+
+                                path = grid.FindPath(transform.position, newPos, moveTotal);
+
+                                lerpTo = path[1].vertPos;
+                                lerpEnd = newPos;
+                                pathProgress = 1;
+                                LerpStart = true;
+                            }
                         }
                     }
                 }
