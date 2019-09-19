@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour {
     float lerpLength;
     float startTime;
 
-    Vector3 lerpTo;
+    public Vector3 lerpTo;
 
     //Variables for combat
     public float moveTotal;
@@ -102,21 +102,25 @@ public class PlayerScript : MonoBehaviour {
 
                 float fracLength = distCovered / lerpLength;
 
-                if(Vector3.Distance(transform.position, lerpTo) < 0.5)
+                if(lerpTo != lerpEnd)
                 {
-                    pathProgress++;
-                    if (pathProgress < path.Count)
+                    if (Vector3.Distance(transform.position, lerpTo) < 0.5)
                     {
-                        lerpTo = path[pathProgress].vertPos;
-                        lerpTo.z = -1;
-                        animFloat = AnimationFloat(transform.position, lerpTo);
+                        pathProgress++;
+                        if (pathProgress < path.Count)
+                        {
+                            lerpTo = path[pathProgress].vertPos;
+                            lerpTo.z = -1;
+                            animFloat = AnimationFloat(transform.position, lerpTo);
+                        }
                     }
                 }
 
                 transform.position = Vector3.Lerp(transform.position, lerpTo, fracLength);
 
-                if (transform.position == lerpEnd)
+                if (Vector3.Distance(transform.position,lerpEnd)<=.05)
                 {
+                    transform.position = lerpEnd;
                     IsLerping = false;
                 }
 
@@ -177,6 +181,7 @@ public class PlayerScript : MonoBehaviour {
                             path = grid.FindPath(transform.position, newPos, moveTotal);
 
                             lerpTo = path[1].vertPos;
+                            lerpTo.z = -1;
                             lerpEnd = newPos;
                             pathProgress = 1;
                             LerpStart = true;

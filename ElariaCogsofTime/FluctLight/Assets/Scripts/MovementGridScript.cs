@@ -72,7 +72,7 @@ public class MovementGridScript : MonoBehaviour
             //checking if path is complete
             if(curVert == endVert)
             {
-                Debug.Log(iteration + "st Round");
+                //Debug.Log(iteration + "st Round");
                 break;
             }
 
