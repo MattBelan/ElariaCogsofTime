@@ -57,6 +57,11 @@ public class PlayerScript : MonoBehaviour {
     int pathProgress;
     Vector3 lerpEnd;
 
+    //Health Bar
+    GameObject healthDisplay;
+    GameObject healthBar;
+    public GameObject healthPrefab;
+
     // Use this for initialization
     void Start () {
         currentMove = 0;
@@ -72,12 +77,21 @@ public class PlayerScript : MonoBehaviour {
         lerpSpeed = 1.0f;
         animFloat = 0;
         playing = true;
+
+        healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
+        healthBar = healthDisplay.transform.GetChild(1).gameObject;
+        healthDisplay.transform.SetParent(transform);
     }
 	
 	// Update is called once per frame
 	void Update () {
         playerHealth.text = "Player Health: " + Health;
         playerMoves.text = "Player Moves: " + (moveTotal - currentMove-1);
+
+        //health bar
+        Vector3 newScale = healthBar.transform.localScale;
+        newScale.x = Health / 20;
+        healthBar.transform.localScale = newScale;
 
         data.health = Health;
         data.x = transform.position.x;

@@ -5615,7 +5615,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &732316783
@@ -5664,6 +5664,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 732316783}
   grid: {fileID: 1980965602}
+  healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
+    type: 3}
 --- !u!65 &732316785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10756,7 +10758,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1289651420
@@ -10805,6 +10807,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 1289651420}
   grid: {fileID: 1980965602}
+  healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
+    type: 3}
 --- !u!65 &1289651422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12579,6 +12583,8 @@ MonoBehaviour:
   animator: {fileID: 1500752849}
   playing: 0
   grid: {fileID: 1980965602}
+  healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
+    type: 3}
 --- !u!212 &1500752848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12739,7 +12745,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1508674290
@@ -12788,6 +12794,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 1508674290}
   grid: {fileID: 1980965602}
+  healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
+    type: 3}
 --- !u!65 &1508674292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16013,6 +16021,7 @@ GameObject:
   - component: {fileID: 1914094805}
   - component: {fileID: 1914094804}
   - component: {fileID: 1914094803}
+  - component: {fileID: 1914094807}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
@@ -16105,6 +16114,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1914094807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914094802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bdb7c20ea9f0749bb2aaf5df8cde47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cm: {fileID: 398384638}
+  cam: {fileID: 519420031}
+  playerCanvas: {fileID: 1914094802}
+  textFont: {fileID: 12800000, guid: e91b932942786204cadcf17d14a1b7cd, type: 3}
 --- !u!1001 &1916867439
 PrefabInstance:
   m_ObjectHideFlags: 0
