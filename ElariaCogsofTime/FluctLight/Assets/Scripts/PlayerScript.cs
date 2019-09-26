@@ -37,6 +37,7 @@ public class PlayerScript : MonoBehaviour {
     //UI Elements
     public Text playerHealth;
     public Text playerMoves;
+    public List<Text> comLog;
 
     //Data for saving
     public SaveData data;
@@ -173,6 +174,10 @@ public class PlayerScript : MonoBehaviour {
     {
         Health -= dam;
         Instantiate(damagePrefab, gameObject.transform.position, gameObject.transform.rotation);
+
+        comLog[2].text = comLog[1].text;
+        comLog[1].text = comLog[0].text;
+        comLog[0].text = "Elaria took " + dam + " damage.";
     }
 
     public void MovePlayerTo(TileScript tile)
@@ -230,6 +235,10 @@ public class PlayerScript : MonoBehaviour {
 
                         Attacking = false;
                         Instantiate(damagePrefab, enemy.transform.position, enemy.transform.rotation);
+
+                        comLog[2].text = comLog[1].text;
+                        comLog[1].text = comLog[0].text;
+                        comLog[0].text = "Elaria dealt " + damage + " damage.";
                     }
                 }
             }

@@ -46,7 +46,7 @@ public class CombatManager : MonoBehaviour {
         player.Health = 20;
         if (PlayerPrefs.GetInt("Loading") > 0)
         {
-            saving.LoadGame();
+            //saving.LoadGame();
             if(player.curLevel == 1 && SceneManager.GetActiveScene().name != "Dungeon_Level1")
             {
                 SceneManager.LoadScene("Dungeon_Level1");
@@ -110,6 +110,10 @@ public class CombatManager : MonoBehaviour {
                 switch (turnState)
                 {
                     case TurnState.Character:
+                        if (player.Health <= 0)
+                        {
+                            SceneManager.LoadScene("MainMenu");
+                        }
                         turnState = TurnState.Action;
                         break;
 
@@ -216,6 +220,18 @@ public class CombatManager : MonoBehaviour {
         if (!player.IsLerping)
         {
             player.Moving = !player.Moving;
+            if (player.Moving)
+            {
+                player.comLog[2].text = player.comLog[1].text;
+                player.comLog[1].text = player.comLog[0].text;
+                player.comLog[0].text = "Elaria is ready to move.";
+            }
+            else
+            {
+                player.comLog[2].text = player.comLog[1].text;
+                player.comLog[1].text = player.comLog[0].text;
+                player.comLog[0].text = "Elaria is deciding her action.";
+            }
         }
     }
 
@@ -232,6 +248,18 @@ public class CombatManager : MonoBehaviour {
         if (!player.IsLerping)
         {
             player.Attacking = !player.Attacking;
+            if (player.Attacking)
+            {
+                player.comLog[2].text = player.comLog[1].text;
+                player.comLog[1].text = player.comLog[0].text;
+                player.comLog[0].text = "Elaria is ready to attack.";
+            }
+            else
+            {
+                player.comLog[2].text = player.comLog[1].text;
+                player.comLog[1].text = player.comLog[0].text;
+                player.comLog[0].text = "Elaria is deciding her action.";
+            }
         }
     }
 
