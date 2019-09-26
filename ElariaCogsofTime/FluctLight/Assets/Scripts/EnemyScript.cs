@@ -41,6 +41,11 @@ public class EnemyScript : MonoBehaviour {
     int pathProgress;
     Vector3 lerpEnd;
 
+    //Health Bar
+    GameObject healthDisplay;
+    GameObject healthBar;
+    public GameObject healthPrefab;
+
     // Use this for initialization
     void Start () {
         Health = 10;
@@ -55,10 +60,19 @@ public class EnemyScript : MonoBehaviour {
         LerpStart = false;
         lerpSpeed = 1.0f;
         animFloat = 0;
+
+        healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
+        healthBar = healthDisplay.transform.GetChild(1).gameObject;
+        healthDisplay.transform.SetParent(transform);
     }
 	
 	// Update is called once per frame
 	void Update () {
+        //health bar
+        Vector3 newScale = healthBar.transform.localScale;
+        newScale.x = Health / 10;
+        healthBar.transform.localScale = newScale;
+
         data.health = Health;
         data.x = transform.position.x;
         data.y = transform.position.y;

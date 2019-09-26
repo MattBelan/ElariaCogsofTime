@@ -38,7 +38,6 @@ public class TileScript : MonoBehaviour {
         {
             if (ps.Moving)
             {
-                Debug.Log("Moving");
                 ps.MovePlayerTo(this);
             }
         }
