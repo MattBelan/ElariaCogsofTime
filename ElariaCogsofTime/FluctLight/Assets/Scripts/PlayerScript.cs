@@ -52,8 +52,8 @@ public class PlayerScript : MonoBehaviour {
 
     //Pathfinding
     public MovementGridScript grid;
-    Vector3 currGridTarget;
-    Vector3 endingTarget;
+    public Vector3 currGridTarget;
+    public Vector3 endingTarget;
     List<GridVertex> path;
     int pathProgress;
     Vector3 lerpEnd;
