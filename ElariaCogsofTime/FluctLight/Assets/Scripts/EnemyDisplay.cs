@@ -38,11 +38,20 @@ public class EnemyDisplay : MonoBehaviour
                 enemyHealth[i].text = cm.enemies[i].Health + "/10";
             }
             enemyHealth[i].font = textFont;
-            Vector3 screenPos = cam.WorldToScreenPoint(cm.enemies[i].transform.position);
-            screenPos.x -= Screen.width/2;
-            screenPos.y -= Screen.height/2;
+            Vector3 screenPos = GetScreenPosition(cm.enemies[i].transform, playerCanvas.GetComponent<Canvas>(), cam);
             RectTransform textPos = enemyHealth[i].GetComponent<RectTransform>();
             textPos.anchoredPosition = screenPos;
         }
+    }
+
+    public static Vector3 GetScreenPosition(Transform transform, Canvas canvas, Camera cam)
+    {
+        Vector3 pos;
+        float width = canvas.GetComponent<RectTransform>().sizeDelta.x;
+        float height = canvas.GetComponent<RectTransform>().sizeDelta.y;
+        float x = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width;
+        float y = Camera.main.WorldToScreenPoint(transform.position).y / Screen.height;
+        pos = new Vector3(width * x - width / 2, y * height - height / 2);
+        return pos;
     }
 }
