@@ -7440,6 +7440,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 732316783}
   grid: {fileID: 1980965602}
+  currGridTarget: {x: 0, y: 0, z: 0}
+  endingTarget: {x: 0, y: 0, z: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
 --- !u!65 &732316785
@@ -12741,6 +12743,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 1289651420}
   grid: {fileID: 1980965602}
+  currGridTarget: {x: 0, y: 0, z: 0}
+  endingTarget: {x: 0, y: 0, z: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
 --- !u!65 &1289651422
@@ -14583,6 +14587,7 @@ MonoBehaviour:
   attackDist: 2
   damage: 4
   usedAttack: 0
+  dodge: 10
   playerHealth: {fileID: 1820584206}
   playerMoves: {fileID: 802565021}
   comLog:
@@ -14600,6 +14605,8 @@ MonoBehaviour:
   animator: {fileID: 1500752849}
   playing: 0
   grid: {fileID: 1980965602}
+  currGridTarget: {x: 0, y: 0, z: 0}
+  endingTarget: {x: 0, y: 0, z: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
 --- !u!212 &1500752848
@@ -14811,6 +14818,8 @@ MonoBehaviour:
     currentLevel: 0
   animator: {fileID: 1508674290}
   grid: {fileID: 1980965602}
+  currGridTarget: {x: 0, y: 0, z: 0}
+  endingTarget: {x: 0, y: 0, z: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
 --- !u!65 &1508674292

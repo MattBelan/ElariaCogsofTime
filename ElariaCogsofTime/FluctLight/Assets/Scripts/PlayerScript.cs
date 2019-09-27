@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour {
     public float attackDist;
     public float damage;
     public bool usedAttack;
+    public float dodge;
 
     //UI Elements
     public Text playerHealth;
@@ -172,12 +173,21 @@ public class PlayerScript : MonoBehaviour {
 
     public void TakeDamage(float dam)
     {
-        Health -= dam;
-        Instantiate(damagePrefab, gameObject.transform.position, gameObject.transform.rotation);
+        if(UnityEngine.Random.Range(0.0f, 100.0f)>=dodge)
+        {
+            Health -= dam;
+            Instantiate(damagePrefab, gameObject.transform.position, gameObject.transform.rotation);
 
-        comLog[2].text = comLog[1].text;
-        comLog[1].text = comLog[0].text;
-        comLog[0].text = "Elaria took " + dam + " damage.";
+            comLog[2].text = comLog[1].text;
+            comLog[1].text = comLog[0].text;
+            comLog[0].text = "Elaria took " + dam + " damage.";
+        }
+        else
+        {
+            comLog[2].text = comLog[1].text;
+            comLog[1].text = comLog[0].text;
+            comLog[0].text = "Elaria dodged an attack!";
+        }
     }
 
     public void MovePlayerTo(TileScript tile)
