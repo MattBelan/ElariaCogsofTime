@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 4056d52c92ee4b84a8eb370c3b52c622
+guid: 7867f8835b7aafa46874bdb84ff48989
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3482814823435281771
-    second: Elaria_MoveRight_0
+      213: 2731518100149534832
+    second: Elaria_Overworld_Still_0
   - first:
-      213: -5840730508214449144
-    second: Elaria_MoveRight_1
+      213: 5867458915329983061
+    second: Elaria_Overworld_Still_1
   - first:
-      213: 1901408726681506491
-    second: Elaria_MoveRight_2
+      213: 7108164143250039432
+    second: Elaria_Overworld_Still_2
   - first:
-      213: 3228479125580006794
-    second: Elaria_MoveRight_3
+      213: -2809089900667945127
+    second: Elaria_Overworld_Still_3
+  - first:
+      213: -4736027257589059587
+    second: Elaria_Overworld_Still_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -53,7 +56,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 2
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -72,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -83,7 +86,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -94,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: iPhone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -105,7 +108,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -116,7 +119,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -129,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Elaria_MoveRight_0
+      name: Elaria_Overworld_Still_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 50
-        height: 50
+        y: 78
+        width: 40
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36ce8e92326c4874cb5265c8c12736bb
-      internalID: -3482814823435281771
+      spriteID: e200676998a645a41a16fef51b0b94d0
+      internalID: 2731518100149534832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elaria_MoveRight_1
+      name: Elaria_Overworld_Still_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 0
-        width: 50
-        height: 50
+        x: 40
+        y: 78
+        width: 40
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7d152b40b6fee24081f4a7697e5406b
-      internalID: -5840730508214449144
+      spriteID: c1cde288b42a61a4f81c5053d74299e0
+      internalID: 5867458915329983061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elaria_MoveRight_2
+      name: Elaria_Overworld_Still_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 50
-        height: 50
+        x: 80
+        y: 78
+        width: 40
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +188,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64dbcefbf056d44468ba28fc2671f82a
-      internalID: 1901408726681506491
+      spriteID: 7da1026827214c849a2efac9c3634a9d
+      internalID: 7108164143250039432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elaria_MoveRight_3
+      name: Elaria_Overworld_Still_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 0
-        width: 50
-        height: 50
+        x: 120
+        y: 78
+        width: 40
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,8 +209,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f83423890bedf9d4fbbd3ac7ae18ef86
-      internalID: 3228479125580006794
+      spriteID: 8d90664576eaa0a4bb6f561684a15e39
+      internalID: -2809089900667945127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elaria_Overworld_Still_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 78
+        width: 40
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62df5370108c19d419f9578ccbdc8781
+      internalID: -4736027257589059587
       vertices: []
       indices: 
       edges: []
@@ -215,7 +239,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0ff30d23ee8888047a6591777684eb3b
+    spriteID: e41bec3a20c88ed489d7bd7f2a6116e9
     internalID: 0
     vertices: []
     indices: 

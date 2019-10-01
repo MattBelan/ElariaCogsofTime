@@ -237,19 +237,19 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (Attacking && !usedAttack)
                 {
-                    GameObject panel = Instantiate(attackPanelPrefab);
-                    AttackPanel panelScript = panel.GetComponent<AttackPanel>();
+                    //GameObject panel = Instantiate(attackPanelPrefab);
+                    //AttackPanel panelScript = panel.GetComponent<AttackPanel>();
                     //panelScript.FadeIn();
                     
-                    StartCoroutine(Delay(1));
-
-                    Animator[] anims = panel.GetComponentsInChildren<Animator>();
-                    foreach (Animator anim in anims) {
-                        if (anim.tag == "Player") {
-                            anim.Play("Elaria_Attack_Basic");
-                        }
-                        break;
-                    }
+                    //StartCoroutine(Delay(5));
+                    //Debug.Log("Test");
+                    // Animator[] anims = panel.GetComponentsInChildren<Animator>();
+                    // foreach (Animator anim in anims) {
+                    //     if (anim.tag == "Player") {
+                    //         anim.Play("Elaria_Attack_Basic");
+                    //     }
+                    //     break;
+                    // }
 
                     float dist = Vector3.Distance(transform.position, enemy.transform.position);
 
@@ -266,9 +266,9 @@ public class PlayerScript : MonoBehaviour {
                         comLog[0].text = "Elaria dealt " + damage + " damage.";
                     }
 
-                    StartCoroutine(Delay(2));
+                    //StartCoroutine(Delay(2));
                     //panelScript.FadeOut();
-                    Destroy(panel);
+                    //Destroy(panel);
                 }
             }
         }
