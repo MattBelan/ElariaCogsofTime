@@ -35,8 +35,8 @@ public class EnemyScript : MonoBehaviour {
 
     //Pathfinding
     public MovementGridScript grid;
-    Vector3 currGridTarget;
-    Vector3 endingTarget;
+    public Vector3 currGridTarget;
+    public Vector3 endingTarget;
     List<GridVertex> path;
     int pathProgress;
     Vector3 lerpEnd;
@@ -231,6 +231,7 @@ public class EnemyScript : MonoBehaviour {
                                 path = grid.FindPath(transform.position, newPos, moveTotal);
 
                                 lerpTo = path[1].vertPos;
+                                lerpTo.z = -1;
                                 lerpEnd = newPos;
                                 pathProgress = 1;
                                 LerpStart = true;

@@ -13,6 +13,7 @@ public class GridVertex : MonoBehaviour
     void Awake()
     {
         vertPos = transform.position;
+        //vertPos.z = -1;
         visited = false;
         adjVertices = new List<GridVertex>();
     }
