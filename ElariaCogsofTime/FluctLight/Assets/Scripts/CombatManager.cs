@@ -103,13 +103,16 @@ public class CombatManager : MonoBehaviour {
             }
         }
 
+        // -- ROUND STATES
         switch (State)
         {
             case RoundState.Player:
 
+                // -- TURN STATES
                 switch (turnState)
                 {
                     case TurnState.Character:
+
                         if (player.Health <= 0)
                         {
                             SceneManager.LoadScene("MainMenu");
@@ -119,7 +122,6 @@ public class CombatManager : MonoBehaviour {
 
                     case TurnState.Action:
 
-
                         if (playerPassTurn)
                         {
                             turnState = TurnState.Result;
@@ -127,7 +129,6 @@ public class CombatManager : MonoBehaviour {
                         break;
 
                     case TurnState.Result:
-
 
                         turnState = TurnState.Character;
                         State = RoundState.Enemy;

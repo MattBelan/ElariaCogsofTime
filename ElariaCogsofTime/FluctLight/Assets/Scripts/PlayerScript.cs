@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
+    public GameObject attackPanelPrefab;
     public GameObject currentTile;
     public GameObject highlight;
     public GameObject selector;
@@ -226,6 +227,20 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (Attacking && !usedAttack)
                 {
+                    GameObject panel = Instantiate(attackPanelPrefab);
+                    AttackPanel panelScript = panel.GetComponent<AttackPanel>();
+                    //panelScript.FadeIn();
+                    
+                    StartCoroutine(Delay(1));
+
+                    Animator[] anims = panel.GetComponentsInChildren<Animator>();
+                    foreach (Animator anim in anims) {
+                        if (anim.tag == "Player") {
+                            anim.Play("Elaria_Attack_Basic");
+                        }
+                        break;
+                    }
+
                     float dist = Vector3.Distance(transform.position, enemy.transform.position);
 
                     if (dist <= attackDist)
@@ -240,9 +255,17 @@ public class PlayerScript : MonoBehaviour {
                         comLog[1].text = comLog[0].text;
                         comLog[0].text = "Elaria dealt " + damage + " damage.";
                     }
+
+                    StartCoroutine(Delay(2));
+                    //panelScript.FadeOut();
+                    Destroy(panel);
                 }
             }
         }
+    }
+
+    IEnumerator Delay(int timeToWait) {
+        yield return new WaitForSeconds(timeToWait);
     }
 
     float AnimationFloat(Vector3 start, Vector3 end)

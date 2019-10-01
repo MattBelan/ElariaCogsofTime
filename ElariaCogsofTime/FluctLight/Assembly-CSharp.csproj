@@ -71,6 +71,8 @@
      <Compile Include="Assets\Scripts\SaveData.cs" />
      <Compile Include="Assets\Scripts\SaveScript.cs" />
      <Compile Include="Assets\Scripts\TileScript.cs" />
+     <Compile Include="Assets\Scripts\UI\AttackPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\UIFader.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
