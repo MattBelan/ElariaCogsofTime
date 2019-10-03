@@ -6,14 +6,14 @@ public class UIFader : MonoBehaviour
 {
     public CanvasGroup uiElement;
 
-    public void FadeIn()
+    public void FadeIn(float lerpTime = 0.5f)
     {
-        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 1));
+        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 1, lerpTime));
     }
 
-    public void FadeOut()
+    public void FadeOut(float lerpTime = 0.5f)
     {
-        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 0));
+        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 0, lerpTime));
     }
 
     public IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float start, float end, float lerpTime = 0.5f)
@@ -35,7 +35,5 @@ public class UIFader : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-
-        // print("done");
     }
 }

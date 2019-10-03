@@ -26,6 +26,8 @@ public class EnemyScript : MonoBehaviour {
 
     public Text enemyHealth;
 
+    public CombatManager combatManager;
+
     public PlayerScript player;
 
     public SaveData data;
@@ -61,6 +63,7 @@ public class EnemyScript : MonoBehaviour {
         lerpSpeed = 1.0f;
         animFloat = 0;
 
+        combatManager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
         healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
         healthBar = healthDisplay.transform.GetChild(1).gameObject;
         healthDisplay.transform.SetParent(transform);
@@ -135,23 +138,7 @@ public class EnemyScript : MonoBehaviour {
 
     void OnMouseOver()
     {
-        if (player.Attacking) {
-            player.moveSelector(this.transform.position);
-            player.setHighlightPos(Vector3.zero);
-        } 
-        if (IsAlive)
-        {
-            enemyHealth.text = "Enemy Health: " + Health;
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (player.Attacking)
-                {
-                    player.setHighlightPos(new Vector3(200,200,0));
-                    player.Attack(this);
-                }
-            }
-        }
+        combatManager.PlayerAttack(this);
     }
 
     bool PlayerVisible()

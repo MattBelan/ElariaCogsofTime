@@ -20,6 +20,8 @@ public class CombatManager : MonoBehaviour {
     TurnState turnState;
 
     public Canvas playerCanvas;
+
+    public Canvas attackPanelCanvasPrefab;
     public Button[] buttons;
     public Canvas pauseMenu;
 
@@ -32,6 +34,7 @@ public class CombatManager : MonoBehaviour {
     bool enemyPassTurn;
 
     bool playing;
+    bool isDisplayingAttack;
     bool enemiesMoved;
     bool enemiesMoving;
     bool enemiesAttacking;
@@ -40,10 +43,12 @@ public class CombatManager : MonoBehaviour {
     {
         playerPassTurn = false;
         playing = false;
+        isDisplayingAttack = false;
         enemiesMoved = false;
         enemiesMoving = false;
         enemiesAttacking = false;
         player.Health = 20;
+        attackPanelCanvasPrefab.enabled = false;
         if (PlayerPrefs.GetInt("Loading") > 0)
         {
             //saving.LoadGame();
@@ -61,7 +66,8 @@ public class CombatManager : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         State = RoundState.Player;
         turnState = TurnState.Character;
         if(SceneManager.GetActiveScene().name == "Dungeon_Level1")
@@ -75,7 +81,8 @@ public class CombatManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         player.playing = playing;
         if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Escape))
         {
@@ -122,6 +129,11 @@ public class CombatManager : MonoBehaviour {
 
                     case TurnState.Action:
 
+                        if (isDisplayingAttack)
+                        {
+                            break;
+                        }
+
                         if (playerPassTurn)
                         {
                             turnState = TurnState.Result;
@@ -134,48 +146,50 @@ public class CombatManager : MonoBehaviour {
                         State = RoundState.Enemy;
                         break;
                 }
-
                 break;
 
             case RoundState.Enemy:
-                if (!enemiesMoved)
+            
+                if (!isDisplayingAttack) 
                 {
-                    foreach (EnemyScript enemy in enemies)
+                    if (!enemiesMoved)
                     {
-                        if (enemy.IsAlive)
-                        {
-                            enemy.AIMove();
-                        }
-                    }
-                    enemiesMoved = true;
-                    enemiesMoving = true;
-                }
-                else if (enemiesMoving)
-                {
-                    int numMoving = 0;
-                    foreach (EnemyScript enemy in enemies)
-                    {
-                        if (enemy.IsLerping)
-                        {
-                            numMoving++;
-                        }
-                    }
-                    if (numMoving <= 0)
-                    {
-                        enemiesMoving = false;
-                        enemiesAttacking = true;
-
                         foreach (EnemyScript enemy in enemies)
                         {
                             if (enemy.IsAlive)
                             {
-                                enemy.AIAttack();
+                                enemy.AIMove();
                             }
                         }
-                        State = RoundState.Reset;
+                        enemiesMoved = true;
+                        enemiesMoving = true;
+                    }
+                    else if (enemiesMoving)
+                    {
+                        int numMoving = 0;
+                        foreach (EnemyScript enemy in enemies)
+                        {
+                            if (enemy.IsLerping)
+                            {
+                                numMoving++;
+                            }
+                        }
+                        if (numMoving <= 0)
+                        {
+                            enemiesMoving = false;
+                            enemiesAttacking = true;
+
+                            foreach (EnemyScript enemy in enemies)
+                            {
+                                if (enemy.IsAlive)
+                                {
+                                    enemy.AIAttack();
+                                }
+                            }
+                            State = RoundState.Reset;
+                        }
                     }
                 }
-                
                 break;
 
             case RoundState.Reset:
@@ -216,6 +230,32 @@ public class CombatManager : MonoBehaviour {
         }
 	}
 
+    public void PlayerAttack(EnemyScript enemy) // probably should make a base enemy/entity class for this parameter
+    {
+        if (player.Attacking) 
+        {
+            player.moveSelector(enemy.transform.position);
+            player.setHighlightPos(enemy.transform.position);
+        } 
+        if (enemy.IsAlive)
+        {
+            enemy.enemyHealth.text = "Enemy Health: " + enemy.Health;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (player.Attacking)
+                {
+                    player.setHighlightPos(new Vector3(200,200,0));
+                    player.Attack(enemy);
+                    Canvas displayCanvas = Instantiate(attackPanelCanvasPrefab);
+                    displayCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+                    displayCanvas.sortingLayerName = "Menus";
+                    displayCanvas.enabled = true;
+                }
+            }
+        }
+    }
+
     public void TogglePlayerMovement()
     {
         if (!player.IsLerping)
@@ -235,7 +275,6 @@ public class CombatManager : MonoBehaviour {
             }
         }
     }
-
     public void TogglePlayerPass()
     {
         if (!player.IsLerping)

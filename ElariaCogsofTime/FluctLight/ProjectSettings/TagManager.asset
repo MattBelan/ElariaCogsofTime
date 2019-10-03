@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ground
+  - CombatManager
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2577955247
+    locked: 0
+  - name: Menus
+    uniqueID: 2136828573
     locked: 0

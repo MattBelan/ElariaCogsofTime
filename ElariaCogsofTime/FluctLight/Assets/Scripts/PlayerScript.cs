@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
-    public GameObject attackPanelPrefab;
     public GameObject currentTile;
     public GameObject highlight;
     public GameObject selector;
@@ -19,7 +18,6 @@ public class PlayerScript : MonoBehaviour {
 
     //Lerp Variables and Properties
     public bool IsLerping { get; set; }
-
     public bool LerpStart { get; set; }
 
     float lerpSpeed;
@@ -47,7 +45,7 @@ public class PlayerScript : MonoBehaviour {
 
     //Animator
     public Animator animator;
-    float animFloat;
+    public float animFloat;
 
     //Pausing
     public bool playing;
@@ -66,7 +64,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject healthPrefab;
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+    {
         currentMove = 0;
         Health = 20;
         Moving = false;
@@ -87,7 +86,8 @@ public class PlayerScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         playerHealth.text = "Player Health: " + Health;
         playerMoves.text = "Player Moves: " + (moveTotal - currentMove-1);
 
@@ -237,20 +237,6 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (Attacking && !usedAttack)
                 {
-                    //GameObject panel = Instantiate(attackPanelPrefab);
-                    //AttackPanel panelScript = panel.GetComponent<AttackPanel>();
-                    //panelScript.FadeIn();
-                    
-                    //StartCoroutine(Delay(5));
-                    //Debug.Log("Test");
-                    // Animator[] anims = panel.GetComponentsInChildren<Animator>();
-                    // foreach (Animator anim in anims) {
-                    //     if (anim.tag == "Player") {
-                    //         anim.Play("Elaria_Attack_Basic");
-                    //     }
-                    //     break;
-                    // }
-
                     float dist = Vector3.Distance(transform.position, enemy.transform.position);
 
                     if (dist <= attackDist)
@@ -259,16 +245,12 @@ public class PlayerScript : MonoBehaviour {
                         usedAttack = true;
 
                         Attacking = false;
-                        Instantiate(damagePrefab, enemy.transform.position, enemy.transform.rotation);
+                        //Instantiate(damagePrefab, enemy.transform.position, enemy.transform.rotation);
 
                         comLog[2].text = comLog[1].text;
                         comLog[1].text = comLog[0].text;
                         comLog[0].text = "Elaria dealt " + damage + " damage.";
                     }
-
-                    //StartCoroutine(Delay(2));
-                    //panelScript.FadeOut();
-                    //Destroy(panel);
                 }
             }
         }
