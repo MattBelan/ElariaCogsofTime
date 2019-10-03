@@ -293,4 +293,9 @@ public class PlayerScript : MonoBehaviour {
     {
 
     }
+
+    public virtual void UseAbility()
+    {
+        //To be overwritten
+    }
 }

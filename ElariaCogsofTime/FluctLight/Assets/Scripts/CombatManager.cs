@@ -28,6 +28,11 @@ public class CombatManager : MonoBehaviour {
     public SaveScript saving;
     
     public PlayerScript player;
+    /*
+    public List<PlayerScript> playerCharacters;
+    public int selectedPlayer;
+    */
+
     public List<EnemyScript> enemies;
 
     bool playerPassTurn;
@@ -63,6 +68,8 @@ public class CombatManager : MonoBehaviour {
             PlayerPrefs.SetInt("Loading", 0);
             PlayerPrefs.Save();
         }
+
+        //selectedPlayer = playerCharacters.FindIndex(player);
     }
 
 	// Use this for initialization
@@ -320,4 +327,22 @@ public class CombatManager : MonoBehaviour {
             pauseMenu.enabled = true;
         }
     }
+
+
+
+    /*
+    public void SelectNextPC()
+    {
+        selectedPlayer++;
+        if (selectedPlayer < playerCharacters.Count)
+        {
+            player = playerCharacters[selectedPlayer];
+        }
+        else
+        {
+            selectedPlayer = 0;
+            player = playerCharacters[selectedPlayer];
+        }
+    }
+    */
 }
