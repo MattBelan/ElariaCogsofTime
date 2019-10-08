@@ -298,4 +298,14 @@ public class PlayerScript : MonoBehaviour {
     {
         //To be overwritten
     }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            CombatManager combatManager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
+            combatManager.player = this;
+            combatManager.selectedPlayer = combatManager.playerCharacters.IndexOf(this);
+        }
+    }
 }

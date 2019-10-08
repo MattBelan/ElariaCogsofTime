@@ -28,10 +28,10 @@ public class CombatManager : MonoBehaviour {
     public SaveScript saving;
     
     public PlayerScript player;
-    /*
+    
     public List<PlayerScript> playerCharacters;
     public int selectedPlayer;
-    */
+    
 
     public List<EnemyScript> enemies;
 
@@ -43,6 +43,8 @@ public class CombatManager : MonoBehaviour {
     bool enemiesMoved;
     bool enemiesMoving;
     bool enemiesAttacking;
+
+    public CameraScript cam;
 
     void Awake()
     {
@@ -69,7 +71,7 @@ public class CombatManager : MonoBehaviour {
             PlayerPrefs.Save();
         }
 
-        //selectedPlayer = playerCharacters.FindIndex(player);
+        selectedPlayer = playerCharacters.IndexOf(player);
     }
 
 	// Use this for initialization
@@ -116,6 +118,15 @@ public class CombatManager : MonoBehaviour {
                 SceneManager.LoadScene("MainMenu");
             }
         }
+
+        //swapping players and handling camera
+        cam.player = player.gameObject;
+
+        if(Input.GetButtonDown("Swap Characters"))
+        {
+            SelectNextPC();
+        }
+        selectedPlayer = playerCharacters.IndexOf(player);
 
         // -- ROUND STATES
         switch (State)
@@ -328,9 +339,15 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    public void UseAbility()
+    {
+        if (!player.IsLerping)
+        {
+            player.UseAbility();
+        }
+    }
 
-
-    /*
+    
     public void SelectNextPC()
     {
         selectedPlayer++;
@@ -344,5 +361,5 @@ public class CombatManager : MonoBehaviour {
             player = playerCharacters[selectedPlayer];
         }
     }
-    */
+    
 }
