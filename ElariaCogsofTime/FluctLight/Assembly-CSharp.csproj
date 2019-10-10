@@ -120,6 +120,7 @@
      <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ExampleHelpWindow.cs" />
      <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\CombatEntity.cs" />
      <Compile Include="Assets\Scripts\CombatManager.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\EnemyDisplay.cs" />

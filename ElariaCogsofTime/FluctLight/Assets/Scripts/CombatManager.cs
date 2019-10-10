@@ -257,7 +257,6 @@ public class CombatManager : MonoBehaviour {
         } 
         if (enemy.IsAlive)
         {
-            enemy.enemyHealth.text = "Enemy Health: " + enemy.Health;
 
             if (Input.GetMouseButtonDown(0))
             {
