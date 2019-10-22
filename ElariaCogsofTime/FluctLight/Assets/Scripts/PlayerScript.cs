@@ -260,6 +260,12 @@ public class PlayerScript : CombatEntity {
         //To be overwritten
     }
 
+    public void Dodge()
+    {
+        dodge = 33f;
+        usedAttack = true;
+    }
+
     void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))

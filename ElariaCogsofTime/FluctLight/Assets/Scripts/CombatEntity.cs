@@ -30,6 +30,7 @@ public class CombatEntity : MonoBehaviour
     public float damage;
     public bool usedAttack;
     public float dodge;
+    public float startDodge;
 
     //Animator
     public Animator animator;
@@ -54,7 +55,7 @@ public class CombatEntity : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        startDodge = dodge;
     }
 
     // Update is called once per frame

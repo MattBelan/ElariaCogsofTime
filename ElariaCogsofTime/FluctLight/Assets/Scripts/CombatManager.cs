@@ -212,10 +212,15 @@ public class CombatManager : MonoBehaviour {
 
             case RoundState.Reset:
 
-                player.currentMove = 0;
                 playerPassTurn = false;
-                player.Moving = false;
-                player.usedAttack = false;
+                foreach(PlayerScript p in playerCharacters)
+                {
+                    p.Moving = false;
+                    p.usedAttack = false;
+                    p.currentMove = 0;
+                    p.dodge = p.startDodge;
+                }
+
                 enemiesMoved = false;
                 enemiesMoving = false;
                 enemiesAttacking = true;
@@ -235,9 +240,11 @@ public class CombatManager : MonoBehaviour {
         // Attack
         if (player.usedAttack) {
             buttons[1].interactable = false;
+            buttons[3].interactable = false;
         }
         else {
             buttons[1].interactable = true;
+            buttons[3].interactable = true;
         }
         // Pass
         if (turnState == TurnState.Character) {
@@ -359,6 +366,11 @@ public class CombatManager : MonoBehaviour {
             selectedPlayer = 0;
             player = playerCharacters[selectedPlayer];
         }
+    }
+
+    public void Dodge()
+    {
+        player.Dodge();
     }
     
 }

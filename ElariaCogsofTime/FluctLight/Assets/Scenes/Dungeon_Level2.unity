@@ -2444,13 +2444,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTotal: 5
-  currentMove: 0
-  damage: 3
-  range: 2
-  enemyHealth: {fileID: 921360187}
+  id: 
   combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
+  lerpTo: {x: 0, y: 0, z: 0}
+  moveTotal: 3
+  currentMove: 0
+  range: 6
+  damage: 2
+  usedAttack: 0
+  dodge: 0
+  startDodge: 0
+  animator: {fileID: 120117878}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -2458,12 +2466,17 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  animator: {fileID: 120117878}
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  players: []
 --- !u!65 &120117880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3561,13 +3574,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  combatManager: {fileID: 0}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
+  lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 5
   currentMove: 0
-  damage: 3
   range: 2
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
+  damage: 3
+  usedAttack: 0
+  dodge: 0
+  startDodge: 0
+  animator: {fileID: 232790533}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -3575,12 +3596,17 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  animator: {fileID: 232790533}
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  players: []
 --- !u!65 &232790529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6251,6 +6277,7 @@ MonoBehaviour:
   - {fileID: 1247793884}
   - {fileID: 444750248}
   - {fileID: 532590191}
+  - {fileID: 639021059}
   pauseMenu: {fileID: 1474900415}
   saving: {fileID: 398384640}
   player: {fileID: 1500752847}
@@ -10565,6 +10592,137 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 636168044}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639021057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639021058}
+  - component: {fileID: 639021061}
+  - component: {fileID: 639021060}
+  - component: {fileID: 639021059}
+  m_Layer: 0
+  m_Name: DodgeB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &639021058
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021057}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1804134810}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 203, y: -250.00003}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &639021059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.7607843}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 639021060}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 398384638}
+        m_MethodName: Dodge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &639021060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 54336cde55a79644baadf83194b1ebdd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &639021061
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021057}
+  m_CullTransparentMesh: 0
 --- !u!1 &649856800
 GameObject:
   m_ObjectHideFlags: 0
@@ -20985,24 +21143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95ffecaa6eb956468c0c337cd0b183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTile: {fileID: 696443546}
-  highlight: {fileID: 939859885}
-  selector: {fileID: 1719100442}
-  damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
-    type: 3}
+  id: 
+  combatManager: {fileID: 398384638}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 8
   currentMove: 0
-  attackDist: 5
+  range: 4
   damage: 3
   usedAttack: 0
   dodge: 5
-  playerHealth: {fileID: 1756371488}
-  playerMoves: {fileID: 1548606033}
-  comLog:
-  - {fileID: 847656882}
-  - {fileID: 1427163492}
-  - {fileID: 377314170}
+  startDodge: 5
+  animator: {fileID: 891312508}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -21010,15 +21165,29 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  curLevel: 0
-  animator: {fileID: 891312508}
-  animFloat: 0
-  playing: 0
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  currentTile: {fileID: 696443546}
+  highlight: {fileID: 939859885}
+  selector: {fileID: 1719100442}
+  damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
+    type: 3}
+  playerHealth: {fileID: 1756371488}
+  playerMoves: {fileID: 1548606033}
+  comLog:
+  - {fileID: 847656882}
+  - {fileID: 1427163492}
+  - {fileID: 377314170}
+  curLevel: 0
+  playing: 0
 --- !u!65 &891312510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30778,24 +30947,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95ffecaa6eb956468c0c337cd0b183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTile: {fileID: 623510019}
-  highlight: {fileID: 939859885}
-  selector: {fileID: 1719100442}
-  damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
-    type: 3}
+  id: 
+  combatManager: {fileID: 398384638}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 8
   currentMove: 0
-  attackDist: 2
-  damage: 4
+  range: 1
+  damage: 5
   usedAttack: 0
   dodge: 5
-  playerHealth: {fileID: 1756371488}
-  playerMoves: {fileID: 1548606033}
-  comLog:
-  - {fileID: 847656882}
-  - {fileID: 1427163492}
-  - {fileID: 377314170}
+  startDodge: 5
+  animator: {fileID: 1500752849}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -30803,15 +30969,29 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  curLevel: 0
-  animator: {fileID: 1500752849}
-  animFloat: 0
-  playing: 0
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  currentTile: {fileID: 623510019}
+  highlight: {fileID: 939859885}
+  selector: {fileID: 1719100442}
+  damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
+    type: 3}
+  playerHealth: {fileID: 1756371488}
+  playerMoves: {fileID: 1548606033}
+  comLog:
+  - {fileID: 847656882}
+  - {fileID: 1427163492}
+  - {fileID: 377314170}
+  curLevel: 0
+  playing: 0
 --- !u!212 &1500752848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36274,6 +36454,7 @@ RectTransform:
   - {fileID: 847656884}
   - {fileID: 1427163494}
   - {fileID: 377314172}
+  - {fileID: 639021058}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36398,13 +36579,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  combatManager: {fileID: 0}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
+  lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 5
   currentMove: 0
-  damage: 3
   range: 2
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
+  damage: 3
+  usedAttack: 0
+  dodge: 0
+  startDodge: 0
+  animator: {fileID: 1808556182}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -36412,12 +36601,17 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  animator: {fileID: 1808556182}
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  players: []
 --- !u!65 &1808556184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62769,13 +62963,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  combatManager: {fileID: 0}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
+  lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 5
   currentMove: 0
-  damage: 3
   range: 2
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
+  damage: 3
+  usedAttack: 0
+  dodge: 0
+  startDodge: 0
+  animator: {fileID: 2019872594}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -62783,12 +62985,17 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  animator: {fileID: 2019872594}
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  players: []
 --- !u!65 &2019872596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64756,13 +64963,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  combatManager: {fileID: 0}
+  lerpSpeed: 0
+  lerpLength: 0
+  startTime: 0
+  lerpTo: {x: 0, y: 0, z: 0}
   moveTotal: 5
   currentMove: 0
-  damage: 3
   range: 2
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
+  damage: 3
+  usedAttack: 0
+  dodge: 0
+  startDodge: 0
+  animator: {fileID: 2135741158}
+  animFloat: 0
   data:
     health: 0
     currentMove: 0
@@ -64770,12 +64985,17 @@ MonoBehaviour:
     y: 0
     z: 0
     currentLevel: 0
-  animator: {fileID: 2135741158}
   grid: {fileID: 55199290}
   currGridTarget: {x: 0, y: 0, z: 0}
   endingTarget: {x: 0, y: 0, z: 0}
+  path: []
+  pathProgress: 0
+  lerpEnd: {x: 0, y: 0, z: 0}
+  healthDisplay: {fileID: 0}
+  healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
+  players: []
 --- !u!65 &2135741160
 BoxCollider:
   m_ObjectHideFlags: 0
