@@ -8,11 +8,13 @@ public class TileScript : MonoBehaviour {
     GameObject player;
     PlayerScript ps;
     public GameObject onTile;
+    CombatManager cm;
 
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
         ps = player.GetComponent<PlayerScript>();
+        cm = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
     }
 
 	// Use this for initialization
@@ -24,7 +26,8 @@ public class TileScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //highlighted = false;
-        
+        ps = cm.player;
+        player = cm.player.gameObject;
 		
 	}
 

@@ -4,69 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
+public class PlayerScript : CombatEntity {
 
-public class PlayerScript : MonoBehaviour {
-
+    //Tile Selectors, etc.
     public GameObject currentTile;
     public GameObject highlight;
     public GameObject selector;
     public GameObject damagePrefab;
-    public bool Moving { get; set; }
-    public float Health { get; set; }
-    public float MaxHealth { get; set; }
     public bool Attacking { get; set; }
-
-    //Lerp Variables and Properties
-    public bool IsLerping { get; set; }
-    public bool LerpStart { get; set; }
-
-    float lerpSpeed;
-    float lerpLength;
-    float startTime;
-
-    public Vector3 lerpTo;
-
-    //Variables for combat
-    public float moveTotal;
-    public float currentMove;
-    public float attackDist;
-    public float damage;
-    public bool usedAttack;
-    public float dodge;
-    public ActionIntent intendedAction;
 
     //UI Elements
     public Text playerHealth;
     public Text playerMoves;
     public List<Text> comLog;
 
-    //Data for saving
-    public SaveData data;
+    //Saving
     public float curLevel;
-
-    //Animator
-    public Animator animator;
-    public float animFloat;
 
     //Pausing
     public bool playing;
 
-    //Pathfinding
-    public MovementGridScript grid;
-    public Vector3 currGridTarget;
-    public Vector3 endingTarget;
-    List<GridVertex> path;
-    int pathProgress;
-    Vector3 lerpEnd;
-
-    //Health Bar
-    GameObject healthDisplay;
-    GameObject healthBar;
-    public GameObject healthPrefab;
-
     // Use this for initialization
-    void Start () 
+    public override void Start () 
     {
         currentMove = 0;
         Health = 20;
@@ -90,7 +49,7 @@ public class PlayerScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () 
+	public override void Update () 
     {
         playerHealth.text = "Player Health: " + Health;
         playerMoves.text = "Player Moves: " + (moveTotal - currentMove-1);
@@ -241,8 +200,16 @@ public class PlayerScript : MonoBehaviour {
             if (enemy != null)
             {
                 float dist = Vector3.Distance(transform.position, enemy.transform.position);
+                /*if (Attacking && !usedAttack)
+                {
+                    float dist = Vector3.Distance(transform.position, enemy.transform.position);
 
-                if (dist <= attackDist)
+                    if (dist <= range)
+                    {
+                        enemy.TakeDamage(damage);
+                        usedAttack = true;*/
+
+                if (dist <= range)
                 {
                     enemy.TakeDamage(damage);
 
@@ -298,5 +265,20 @@ public class PlayerScript : MonoBehaviour {
     public virtual void UseAbility()
     {
         //To be overwritten
+    }
+
+    public void Dodge()
+    {
+        dodge = 33f;
+        usedAttack = true;
+    }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            combatManager.player = this;
+            combatManager.selectedPlayer = combatManager.playerCharacters.IndexOf(this);
+        }
     }
 }

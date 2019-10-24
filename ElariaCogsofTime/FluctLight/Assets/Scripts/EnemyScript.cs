@@ -3,55 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyScript : MonoBehaviour {
+public class EnemyScript : CombatEntity {
 
-    public bool Moving { get; set; }
-    public float Health { get; set; }
-    public float MaxHealth {get; set; } 
     public bool IsAlive { get; set; }
 
-    public float moveTotal;
-    public float currentMove;
-    public float damage;
-    public float range;
-
-    public bool IsLerping { get; set; }
-
-    public bool LerpStart { get; set; }
-    public bool isCursorOver;
-
-    float lerpSpeed;
-    float lerpLength;
-    float startTime;
-
-    Vector3 lerpTo;
-
-    public Text enemyHealth;
-
-    public CombatManager combatManager;
-
-    public PlayerScript player;
-
-    public SaveData data;
-
-    public Animator animator;
-    float animFloat;
-
-    //Pathfinding
-    public MovementGridScript grid;
-    public Vector3 currGridTarget;
-    public Vector3 endingTarget;
-    List<GridVertex> path;
-    int pathProgress;
-    Vector3 lerpEnd;
-
-    //Health Bar
-    GameObject healthDisplay;
-    GameObject healthBar;
-    public GameObject healthPrefab;
+    //MAKE THIS A LIST
+    public List<PlayerScript> players;
+    PlayerScript target;
 
     // Use this for initialization
-    void Start () {
+    public override void Start () {
         Health = 10;
         MaxHealth = Health;
         currentMove = 0;
@@ -71,10 +32,13 @@ public class EnemyScript : MonoBehaviour {
         healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
         healthBar = healthDisplay.transform.GetChild(1).gameObject;
         healthDisplay.transform.SetParent(transform);
+
+        players = combatManager.playerCharacters;
+        target = null;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
         //health bar
         Vector3 newScale = healthBar.transform.localScale;
         newScale.x = Health / 10;
@@ -152,30 +116,46 @@ public class EnemyScript : MonoBehaviour {
 
     bool PlayerVisible()
     {
-        float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distToPlayer <= 8)
+        target = null;
+        float closestDist = 100000f;
+
+        foreach (PlayerScript player in players)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 100.0f))
+            float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            if (distToPlayer <= 8)
             {
-                if(hit.collider.gameObject == player.gameObject)
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 100.0f))
                 {
-                    return true;
+                    if (hit.collider.gameObject == player.gameObject)
+                    {
+                        if (distToPlayer < closestDist)
+                        {
+                            target = player;
+                        }
+                    }
                 }
             }
         }
 
-        return false;
+        if (target != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void AIMove()
     {
         if (PlayerVisible())
         {
-            float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            float distToPlayer = Vector3.Distance(transform.position, target.transform.position);
             if (range < distToPlayer)
             {
-                Vector3 direction = (player.transform.position - transform.position) / distToPlayer;
+                Vector3 direction = (target.transform.position - transform.position) / distToPlayer;
 
                 float distToMove = 0;
                 if (distToPlayer <= moveTotal)
@@ -243,11 +223,11 @@ public class EnemyScript : MonoBehaviour {
     {
         if (PlayerVisible())
         {
-            float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            float distToPlayer = Vector3.Distance(transform.position, target.transform.position);
 
             if (distToPlayer <= range)
             {
-                player.TakeDamage(damage);
+                target.TakeDamage(damage);
             }
         }
     }

@@ -40,10 +40,9 @@ public class CombatManager : MonoBehaviour {
     
     public PlayerScript player;
     public AnimationFunctions anims;
-    /*
     public List<PlayerScript> playerCharacters;
     public int selectedPlayer;
-    */
+    
 
     public List<EnemyScript> enemies;
     public EnemyScript targetEnemy;
@@ -57,8 +56,8 @@ public class CombatManager : MonoBehaviour {
     bool enemiesMoved;
     bool enemiesMoving;
     bool enemiesAttacking;
-
     float attackDisplayTime;
+    public CameraScript cam;
 
     void Awake()
     {
@@ -87,7 +86,7 @@ public class CombatManager : MonoBehaviour {
             PlayerPrefs.Save();
         }
 
-        //selectedPlayer = playerCharacters.FindIndex(player);
+        selectedPlayer = playerCharacters.IndexOf(player);
     }
 
 	// Use this for initialization
@@ -156,6 +155,15 @@ public class CombatManager : MonoBehaviour {
                 SceneManager.LoadScene("MainMenu");
             }
         }
+
+        //swapping players and handling camera
+        cam.player = player.gameObject;
+
+        if(Input.GetButtonDown("Swap Characters"))
+        {
+            SelectNextPC();
+        }
+        selectedPlayer = playerCharacters.IndexOf(player);
 
         // -- ROUND STATES
         switch (State)
@@ -281,10 +289,15 @@ public class CombatManager : MonoBehaviour {
 
             case RoundState.Reset:
 
-                player.currentMove = 0;
                 playerPassTurn = false;
-                player.Moving = false;
-                player.usedAttack = false;
+                foreach(PlayerScript p in playerCharacters)
+                {
+                    p.Moving = false;
+                    p.usedAttack = false;
+                    p.currentMove = 0;
+                    p.dodge = p.startDodge;
+                }
+
                 enemiesMoved = false;
                 enemiesMoving = false;
                 enemiesAttacking = true;
@@ -304,9 +317,11 @@ public class CombatManager : MonoBehaviour {
         // Attack
         if (player.usedAttack) {
             buttons[1].interactable = false;
+            buttons[3].interactable = false;
         }
         else {
             buttons[1].interactable = true;
+            buttons[3].interactable = true;
         }
         // Pass
         if (turnState == TurnState.Character) {
@@ -578,9 +593,15 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    public void UseAbility()
+    {
+        if (!player.IsLerping)
+        {
+            player.UseAbility();
+        }
+    }
 
-
-    /*
+    
     public void SelectNextPC()
     {
         selectedPlayer++;
@@ -594,5 +615,10 @@ public class CombatManager : MonoBehaviour {
             player = playerCharacters[selectedPlayer];
         }
     }
-    */
+
+    public void Dodge()
+    {
+        player.Dodge();
+    }
+    
 }
