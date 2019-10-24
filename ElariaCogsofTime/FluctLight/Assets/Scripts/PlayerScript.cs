@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject damagePrefab;
     public bool Moving { get; set; }
     public float Health { get; set; }
+    public float MaxHealth { get; set; }
     public bool Attacking { get; set; }
 
     //Lerp Variables and Properties
@@ -33,6 +34,7 @@ public class PlayerScript : MonoBehaviour {
     public float damage;
     public bool usedAttack;
     public float dodge;
+    public ActionIntent intendedAction;
 
     //UI Elements
     public Text playerHealth;
@@ -68,9 +70,11 @@ public class PlayerScript : MonoBehaviour {
     {
         currentMove = 0;
         Health = 20;
+        MaxHealth = Health;
         Moving = false;
         Attacking = false;
         usedAttack = false;
+        intendedAction = ActionIntent.Deciding;
 
         data = new SaveData();
 
@@ -222,6 +226,7 @@ public class PlayerScript : MonoBehaviour {
                             currentMove += Mathf.Floor(dist);
 
                             Moving = false;
+                            intendedAction = ActionIntent.Deciding;
                         }
                     }
                 }
@@ -235,22 +240,18 @@ public class PlayerScript : MonoBehaviour {
         {
             if (enemy != null)
             {
-                if (Attacking && !usedAttack)
+                float dist = Vector3.Distance(transform.position, enemy.transform.position);
+
+                if (dist <= attackDist)
                 {
-                    float dist = Vector3.Distance(transform.position, enemy.transform.position);
+                    enemy.TakeDamage(damage);
 
-                    if (dist <= attackDist)
-                    {
-                        enemy.TakeDamage(damage);
-                        usedAttack = true;
-
-                        Attacking = false;
-                        //Instantiate(damagePrefab, enemy.transform.position, enemy.transform.rotation);
-
-                        comLog[2].text = comLog[1].text;
-                        comLog[1].text = comLog[0].text;
-                        comLog[0].text = "Elaria dealt " + damage + " damage.";
-                    }
+                    usedAttack = true;
+                    Attacking = false;
+                
+                    comLog[2].text = comLog[1].text;
+                    comLog[1].text = comLog[0].text;
+                    comLog[0].text = "Elaria dealt " + damage + " damage.";
                 }
             }
         }

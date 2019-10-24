@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour {
 
     public bool Moving { get; set; }
     public float Health { get; set; }
+    public float MaxHealth {get; set; } 
     public bool IsAlive { get; set; }
 
     public float moveTotal;
@@ -17,6 +18,7 @@ public class EnemyScript : MonoBehaviour {
     public bool IsLerping { get; set; }
 
     public bool LerpStart { get; set; }
+    public bool isCursorOver;
 
     float lerpSpeed;
     float lerpLength;
@@ -51,10 +53,12 @@ public class EnemyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Health = 10;
+        MaxHealth = Health;
         currentMove = 0;
         moveTotal = 5;
         Moving = false;
         IsAlive = true;
+        isCursorOver = false;
 
         data = new SaveData();
 
@@ -138,7 +142,12 @@ public class EnemyScript : MonoBehaviour {
 
     void OnMouseOver()
     {
-        combatManager.PlayerAttack(this);
+        combatManager.TargetHover(this);
+        isCursorOver = true;
+    }
+    void OnMouseExit()
+    {
+        isCursorOver = false;
     }
 
     bool PlayerVisible()

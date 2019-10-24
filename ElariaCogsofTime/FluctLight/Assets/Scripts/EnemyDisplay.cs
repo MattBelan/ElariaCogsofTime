@@ -41,6 +41,8 @@ public class EnemyDisplay : MonoBehaviour
             Vector3 screenPos = GetScreenPosition(cm.enemies[i].transform, playerCanvas.GetComponent<Canvas>(), cam);
             RectTransform textPos = enemyHealth[i].GetComponent<RectTransform>();
             textPos.anchoredPosition = screenPos;
+
+            enemyHealth[i].enabled = cm.enemies[i].isCursorOver ? true : false; // only display numbers on hover
         }
     }
 

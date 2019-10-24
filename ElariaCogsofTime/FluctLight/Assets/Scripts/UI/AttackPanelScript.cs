@@ -5,27 +5,26 @@ using UnityEngine.UI;
 
 public class AttackPanelScript : UIFader
 {
-    private UIFader fadeEffect;
+    // Object references
     public GameObject[] sprites;
 
-    public bool lateStart = true;
-    public bool dismissPanel = false;
-    public bool displayPanel = false;
+    // Display booleans
+    private bool display = true;
+    public bool dismiss = false;
+    public bool dismissAfterDelay = false;
+    public bool destroy = false;
+    public bool destroyAfterDelay = false;
 
-    void Start()
-    {
-        uiElement = this.gameObject.GetComponent<CanvasGroup>();
-        uiElement.alpha = 0;
-    }
+    // Display timers
+    public float dismissTimer = 1.0f;
+    public float destroyTimer = 1.0f;
 
-    void Update()
+    // Health Display num
+    public int dynamicHealthVal;
+
+    protected override void Update()
     {
-        // Start
-        if (lateStart)
-        {
-            FadeIn();
-            lateStart = false;
-        }
+        base.Update(); // Child class update
 
         // Directly apply alpha value to sprites
         foreach (GameObject sprite in sprites) 
@@ -39,19 +38,35 @@ public class AttackPanelScript : UIFader
             }
         }
 
-        // Dismiss window
-        if (dismissPanel)
+        // Timers
+        if (dismissAfterDelay)
         {
-            FadeOut();
-            dismissPanel = false;
+            dismissTimer -= Time.deltaTime;
         }
+        if (destroyAfterDelay)
+        {
+            destroyTimer -= Time.deltaTime;
+        }
+
         // Display the window
-        if (displayPanel)
+        if (display)
         {
             Animator anim = this.gameObject.GetComponent<Animator>();
             anim.Play("Attk_Panel_Enter");
-            FadeIn();
-            displayPanel = false;
+            display = false;
+        }
+        // Dismiss window
+        if (dismiss || dismissTimer <= 0)
+        {
+            dismiss = false;
+            playFadeOut = true;
+            dismissAfterDelay = false;
+            dismissTimer = 1.0f;
+        }
+        // Destroy window
+        if (destroy || destroyTimer <= 0)
+        {
+            Destroy(gameObject.GetComponentInParent<RectTransform>().gameObject);
         }
     }
 }

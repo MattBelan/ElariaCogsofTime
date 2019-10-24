@@ -4,36 +4,69 @@ using UnityEngine;
 
 public class UIFader : MonoBehaviour
 {
+    // Canvas elements
     public CanvasGroup uiElement;
 
-    public void FadeIn(float lerpTime = 0.5f)
-    {
-        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 1, lerpTime));
-    }
+    // MonoBehaviours
+    private bool lateStart = true;
+    
+    // Animation Vars
+    public bool playFadeIn = false;
+    public float fadeInTime = 0.6f;
+    public bool playFadeOut = false;
+    public float fadeOutTime = 0.6f;
 
-    public void FadeOut(float lerpTime = 0.5f)
-    {
-        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 0, lerpTime));
-    }
+    // Lerp
+    private float startTime;
 
-    public IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float start, float end, float lerpTime = 0.5f)
+    protected virtual void Update()
     {
-        float _timeStartedLerping = Time.time;
-        float timeSinceStarted = Time.time - _timeStartedLerping;
-        float percentageComplete = timeSinceStarted / lerpTime;
-
-        while (true) 
+        // Acts as start (for dynamically instantiated objects)
+        if (lateStart) 
         {
-            timeSinceStarted = Time.time - _timeStartedLerping;
-            percentageComplete = timeSinceStarted / lerpTime;
-
-            float currentVal = Mathf.Lerp(start, end, percentageComplete);
-
-            canvasGroup.alpha = currentVal;
-
-            if (percentageComplete >= 1) break;
-
-            yield return new WaitForEndOfFrame();
+            uiElement = this.gameObject.GetComponent<CanvasGroup>();
+            uiElement.alpha = 0;
+            startTime = 0;
+            lateStart = false; // don't run again
         }
+
+        // Opacity to 1
+        if (playFadeIn)
+        {
+            bool finished = Fade(0.0f, 1.0f, fadeInTime);
+            if (finished)
+            {
+                startTime = 0;
+                playFadeIn = false;
+            }
+            else 
+            {
+                playFadeIn = true;
+            }
+        }
+        // Opacity to 0
+        else if (playFadeOut)
+        {
+            bool finished = Fade(1.0f, 0.0f, fadeOutTime);
+            if (finished)
+            {
+                startTime = 0;
+                playFadeOut = false;
+            }
+            else 
+            {
+                playFadeOut = true;
+            }
+        }
+    }
+
+    public bool Fade(float startVal, float endVal, float fadeTime)
+    {
+        startTime += Time.deltaTime / fadeTime;
+        uiElement.alpha = Mathf.Lerp(startVal, endVal, startTime);
+
+        return uiElement.alpha == endVal
+                ? true
+                : false;
     }
 }
