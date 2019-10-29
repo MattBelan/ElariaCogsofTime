@@ -25,6 +25,9 @@ public class MageScript : PlayerScript
             if (Input.GetMouseButtonDown(0))
             {
                 //get mouse world position
+                Vector3 mousePos = combatManager.cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = -1;
+                ElementalBlast(mousePos);
             }
         }
     }
