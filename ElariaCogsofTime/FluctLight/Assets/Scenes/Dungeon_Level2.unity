@@ -1702,11 +1702,7 @@ Transform:
   - {fileID: 1008415201}
   - {fileID: 1784732714}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
-  m_RootOrder: 4
-=======
-  m_RootOrder: 17
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &61972098
 PrefabInstance:
@@ -2448,24 +2444,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  moveTotal: 5
-  currentMove: 0
-  damage: 3
-  range: 2
-  isCursorOver: 0
-  enemyHealth: {fileID: 921360187}
-=======
   id: 
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
-  moveTotal: 3
+  intendedAction: 0
+  moveTotal: 5
   currentMove: 0
-  range: 6
+  range: 2
   damage: 2
   usedAttack: 0
   dodge: 0
@@ -2514,13 +2502,8 @@ Transform:
   m_LocalPosition: {x: 20, y: 18, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 2034067843}
-  m_RootOrder: 5
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 10
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &132795948
 PrefabInstance:
@@ -3077,13 +3060,8 @@ Transform:
   m_LocalPosition: {x: -4, y: -3.8, z: -1.1289062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 255686119}
-  m_RootOrder: 1
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 14
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &190959141
 PrefabInstance:
@@ -3603,22 +3581,16 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 5
   currentMove: 0
   range: 2
-<<<<<<< HEAD
-  isCursorOver: 0
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
-=======
   damage: 3
   usedAttack: 0
   dodge: 0
   startDodge: 0
   animator: {fileID: 232790533}
   animFloat: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   data:
     health: 0
     currentMove: 0
@@ -3710,13 +3682,8 @@ Transform:
   m_LocalPosition: {x: 8, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 2034067843}
-  m_RootOrder: 1
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 6
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &232790533
 Animator:
@@ -4098,11 +4065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259139280663296, guid: 8efac91d9d50258498d94c1124e74e1c, type: 3}
       propertyPath: m_RootOrder
-<<<<<<< HEAD
-      value: 2
-=======
       value: 13
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
       objectReference: {fileID: 0}
     - target: {fileID: 212189197415321396, guid: 8efac91d9d50258498d94c1124e74e1c,
         type: 3}
@@ -4147,11 +4110,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1354943942}
-  - {fileID: 181091538}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &262519310
 PrefabInstance:
@@ -5029,13 +4990,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1474900416}
-  - {fileID: 1804134810}
-  - {fileID: 1719100445}
-  - {fileID: 939859888}
   - {fileID: 1300624429}
+  - {fileID: 939859888}
+  - {fileID: 1719100445}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &325822485
 PrefabInstance:
@@ -6428,6 +6387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCanvas: {fileID: 1804134809}
   attackPanelCanvas: {fileID: 1581259436}
+  playerPanelHealth: {fileID: 0}
+  enemyPanelHealth: {fileID: 0}
   buttons:
   - {fileID: 1247793884}
   - {fileID: 444750248}
@@ -6436,25 +6397,19 @@ MonoBehaviour:
   pauseMenu: {fileID: 1474900415}
   saving: {fileID: 398384640}
   player: {fileID: 1500752847}
-<<<<<<< HEAD
   anims: {fileID: 607643240}
-=======
   playerCharacters:
   - {fileID: 1500752847}
   - {fileID: 891312509}
   selectedPlayer: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   enemies:
   - {fileID: 2135741159}
   - {fileID: 2019872595}
   - {fileID: 232790528}
   - {fileID: 1808556183}
   - {fileID: 120117879}
-<<<<<<< HEAD
   targetEnemy: {fileID: 0}
-=======
   cam: {fileID: 519420030}
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
 --- !u!4 &398384639
 Transform:
   m_ObjectHideFlags: 0
@@ -6467,11 +6422,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD
-  m_RootOrder: 1
-=======
   m_RootOrder: 4
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &398384640
 MonoBehaviour:
@@ -10223,7 +10174,7 @@ Transform:
   m_Children:
   - {fileID: 1821316835}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &607643240
 MonoBehaviour:
@@ -18146,7 +18097,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
   m_Father: {fileID: 1821316835}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18169,17 +18119,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
-=======
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &696443546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1844791303469902, guid: 6a2ec97216261e9429f643ba7c02e604,
-    type: 3}
-  m_PrefabInstance: {fileID: 1840932319}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
 --- !u!1001 &698953513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21244,6 +21183,7 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 8
   currentMove: 0
   range: 4
@@ -21270,7 +21210,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
-  currentTile: {fileID: 696443546}
+  currentTile: {fileID: 1772803945}
   highlight: {fileID: 939859885}
   selector: {fileID: 1719100442}
   damagePrefab: {fileID: 1165446602346658, guid: 1091f5e57ffe29e4682eb66b7ac3cd10,
@@ -27238,11 +27178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4985325859376830, guid: a2eca58129b0bbb4c8eb71678aa0de12, type: 3}
       propertyPath: m_RootOrder
-<<<<<<< HEAD
-      value: 3
-=======
       value: 11
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2eca58129b0bbb4c8eb71678aa0de12, type: 3}
@@ -29066,13 +29002,8 @@ Transform:
   - {fileID: 1890228157}
   - {fileID: 673442982}
   - {fileID: 1939465038}
-<<<<<<< HEAD
-  m_Father: {fileID: 255686119}
-  m_RootOrder: 0
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 5
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1366497200
 PrefabInstance:
@@ -30792,13 +30723,8 @@ RectTransform:
   - {fileID: 517700533}
   - {fileID: 2004985765}
   - {fileID: 1757676732}
-<<<<<<< HEAD
-  m_Father: {fileID: 323935226}
-  m_RootOrder: 0
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 15
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -31243,26 +31169,16 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 8
   currentMove: 0
   range: 1
   damage: 5
   usedAttack: 0
-<<<<<<< HEAD
-  dodge: 0
-  intendedAction: 0
-  playerHealth: {fileID: 1756371488}
-  playerMoves: {fileID: 1548606033}
-  comLog:
-  - {fileID: 847656882}
-  - {fileID: 1427163492}
-  - {fileID: 377314170}
-=======
   dodge: 5
   startDodge: 5
   animator: {fileID: 1500752849}
   animFloat: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   data:
     health: 0
     currentMove: 0
@@ -36507,6 +36423,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769672678}
   m_CullTransparentMesh: 0
+--- !u!1 &1772803945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1844791303469902, guid: 6a2ec97216261e9429f643ba7c02e604,
+    type: 3}
+  m_PrefabInstance: {fileID: 1840932319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1784732712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36767,14 +36689,9 @@ RectTransform:
   - {fileID: 847656884}
   - {fileID: 1427163494}
   - {fileID: 377314172}
-<<<<<<< HEAD
-  m_Father: {fileID: 323935226}
-  m_RootOrder: 1
-=======
   - {fileID: 639021058}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -36903,22 +36820,16 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 5
   currentMove: 0
   range: 2
-<<<<<<< HEAD
-  isCursorOver: 0
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
-=======
   damage: 3
   usedAttack: 0
   dodge: 0
   startDodge: 0
   animator: {fileID: 1808556182}
   animFloat: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   data:
     health: 0
     currentMove: 0
@@ -36961,9 +36872,8 @@ Transform:
   m_LocalPosition: {x: 18, y: -2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
   m_Father: {fileID: 2034067843}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821316834
 GameObject:
@@ -36997,10 +36907,6 @@ Transform:
   - {fileID: 320110956}
   m_Father: {fileID: 607643239}
   m_RootOrder: 0
-=======
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1822091009
 PrefabInstance:
@@ -37470,7 +37376,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1840932319}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696443546}
+  m_GameObject: {fileID: 1772803945}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d18412c49a83e648b35035a0410eac0, type: 3}
@@ -63332,22 +63238,16 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 5
   currentMove: 0
   range: 2
-<<<<<<< HEAD
-  isCursorOver: 0
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
-=======
   damage: 3
   usedAttack: 0
   dodge: 0
   startDodge: 0
   animator: {fileID: 2019872594}
   animFloat: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   data:
     health: 0
     currentMove: 0
@@ -63390,13 +63290,8 @@ Transform:
   m_LocalPosition: {x: 15, y: 6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 2034067843}
-  m_RootOrder: 3
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 8
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2023406442
 PrefabInstance:
@@ -63586,13 +63481,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1500752851}
-  - {fileID: 232790532}
-  - {fileID: 2135741161}
-  - {fileID: 2019872597}
   - {fileID: 1808556185}
-  - {fileID: 120117881}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2034473644
 PrefabInstance:
@@ -65380,22 +65271,16 @@ MonoBehaviour:
   lerpLength: 0
   startTime: 0
   lerpTo: {x: 0, y: 0, z: 0}
+  intendedAction: 0
   moveTotal: 5
   currentMove: 0
   range: 2
-<<<<<<< HEAD
-  isCursorOver: 0
-  enemyHealth: {fileID: 921360187}
-  combatManager: {fileID: 0}
-  player: {fileID: 1500752847}
-=======
   damage: 3
   usedAttack: 0
   dodge: 0
   startDodge: 0
   animator: {fileID: 2135741158}
   animFloat: 0
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
   data:
     health: 0
     currentMove: 0
@@ -65438,13 +65323,8 @@ Transform:
   m_LocalPosition: {x: -1, y: 6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 2034067843}
-  m_RootOrder: 2
-=======
   m_Father: {fileID: 0}
-  m_RootOrder: 7
->>>>>>> 98b322c85d7a572d875728e538bcad93ffb875bc
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2139750736
 PrefabInstance:
