@@ -58,6 +58,9 @@ public class CombatManager : MonoBehaviour {
     bool enemiesAttacking;
     float attackDisplayTime;
     public CameraScript cam;
+    bool enemiesAttacked;
+
+    int currEnemy;
 
     void Awake()
     {
@@ -69,6 +72,9 @@ public class CombatManager : MonoBehaviour {
         enemiesMoved = false;
         enemiesMoving = false;
         enemiesAttacking = false;
+        enemiesAttacked = false;
+        currEnemy = 0;
+
         player.Health = 20;
         attackPanelCanvas.enabled = false;
         if (PlayerPrefs.GetInt("Loading") > 0)
@@ -246,12 +252,9 @@ public class CombatManager : MonoBehaviour {
                 {
                     if (!enemiesMoved)
                     {
-                        foreach (EnemyScript enemy in enemies)
+                        if (enemies[currEnemy].IsAlive)
                         {
-                            if (enemy.IsAlive)
-                            {
-                                enemy.AIMove();
-                            }
+                            enemies[currEnemy].AIMove();
                         }
                         enemiesMoved = true;
                         enemiesMoving = true;
@@ -270,19 +273,21 @@ public class CombatManager : MonoBehaviour {
                         {
                             enemiesMoving = false;
                             enemiesAttacking = true;
+                            enemiesMoved = false;
 
-                            foreach (EnemyScript enemy in enemies)
+                            if (enemies[currEnemy].IsAlive)
                             {
-                                if (enemy.IsAlive)
-                                {
-                                    
-                                    enemy.AIAttack();
-
-
-                                }
+                                enemies[currEnemy].AIAttack();
                             }
-                            State = RoundState.Reset;
+
+                            currEnemy++;
                         }
+                    }
+
+                    if (currEnemy >= enemies.Count)
+                    {
+                        currEnemy = 0;
+                        State = RoundState.Reset;
                     }
                 }
                 break;
@@ -479,7 +484,7 @@ public class CombatManager : MonoBehaviour {
                     player.moveSelector(target.transform.position);
                     player.setHighlightPos(target.transform.position);
 
-                    if (Input.GetMouseButtonDown(0) && !player.usedAttack) // on mouse press
+                    if (Input.GetMouseButtonDown(0) && !player.usedAttack && Vector3.Distance(player.transform.position, target.transform.position) <= player.range) // on mouse press
                     {
                         player.setHighlightPos(new Vector3(200,200,0)); // make highlight live in Combatmanager
                         player.intendedAction = ActionIntent.Deciding;

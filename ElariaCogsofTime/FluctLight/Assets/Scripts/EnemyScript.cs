@@ -132,6 +132,7 @@ public class EnemyScript : CombatEntity {
                         if (distToPlayer < closestDist)
                         {
                             target = player;
+                            closestDist = distToPlayer;
                         }
                     }
                 }
