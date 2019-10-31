@@ -21177,7 +21177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a173f8cc7f1f4a880dff38043f951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Milosh
   combatManager: {fileID: 398384638}
   lerpSpeed: 0
   lerpLength: 0
@@ -31166,7 +31166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf70376c08712c4b84bdad7089f272d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Elaria
   combatManager: {fileID: 398384638}
   lerpSpeed: 0
   lerpLength: 0

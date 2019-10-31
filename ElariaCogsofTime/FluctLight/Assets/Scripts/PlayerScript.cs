@@ -51,9 +51,6 @@ public class PlayerScript : CombatEntity {
 	// Update is called once per frame
 	public override void Update () 
     {
-        playerHealth.text = "Player Health: " + Health;
-        playerMoves.text = "Player Moves: " + (moveTotal - currentMove-1);
-
         //health bar
         Vector3 newScale = healthBar.transform.localScale;
         newScale.x = Health / 20;

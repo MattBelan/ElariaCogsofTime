@@ -171,6 +171,9 @@ public class CombatManager : MonoBehaviour {
         }
         selectedPlayer = playerCharacters.IndexOf(player);
 
+        player.playerHealth.text = "Player Health: " + player.Health;
+        player.playerMoves.text = "Player Moves: " + (player.moveTotal - player.currentMove - 1);
+
         // -- ROUND STATES
         switch (State)
         {
@@ -533,13 +536,13 @@ public class CombatManager : MonoBehaviour {
             {
                 player.comLog[2].text = player.comLog[1].text;
                 player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = "Elaria is ready to move.";
+                player.comLog[0].text = player.id + " is ready to move.";
             }
             else if (player.intendedAction == ActionIntent.Deciding)
             {
                 player.comLog[2].text = player.comLog[1].text;
                 player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = "Elaria is deciding her action.";
+                player.comLog[0].text = player.id + " is deciding her action.";
             }
         }
     }
