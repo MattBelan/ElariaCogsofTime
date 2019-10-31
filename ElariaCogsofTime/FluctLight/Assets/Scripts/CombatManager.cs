@@ -304,6 +304,7 @@ public class CombatManager : MonoBehaviour {
                     p.usedAttack = false;
                     p.currentMove = 0;
                     p.dodge = p.startDodge;
+                    p.abilityCooldown -= 1;
                 }
 
                 enemiesMoved = false;
@@ -337,6 +338,15 @@ public class CombatManager : MonoBehaviour {
         }
         else {
             buttons[2].interactable = true;
+        }
+        //Ability
+        if (player.usedAbility)
+        {
+            buttons[4].interactable = false;
+        }
+        else
+        {
+            buttons[4].interactable = true;
         }
 	}
 
@@ -572,13 +582,13 @@ public class CombatManager : MonoBehaviour {
             {
                 player.comLog[2].text = player.comLog[1].text;
                 player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = "Elaria is ready to attack.";
+                player.comLog[0].text = player.id + " is ready to attack.";
             }
             else if (player.intendedAction == ActionIntent.Deciding)
             {
                 player.comLog[2].text = player.comLog[1].text;
                 player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = "Elaria is deciding her action.";
+                player.comLog[0].text = player.id + " is deciding her action.";
             }
         }
     }

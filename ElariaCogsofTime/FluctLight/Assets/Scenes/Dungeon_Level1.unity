@@ -4424,6 +4424,7 @@ MonoBehaviour:
   - {fileID: 1801381883}
   - {fileID: 1325546426}
   - {fileID: 2068914676}
+  - {fileID: 1615204279}
   - {fileID: 2032534616}
   pauseMenu: {fileID: 1517098797}
   saving: {fileID: 398384640}
@@ -16792,6 +16793,8 @@ MonoBehaviour:
   - {fileID: 585090461}
   curLevel: 0
   playing: 0
+  usedAbility: 0
+  abilityCooldown: 0
   abilityRadius: 2
   abilityRange: 8
   usingAbility: 0
@@ -18009,6 +18012,8 @@ MonoBehaviour:
   - {fileID: 585090461}
   curLevel: 0
   playing: 0
+  usedAbility: 0
+  abilityCooldown: 0
   abilityRadius: 2
 --- !u!65 &1839524752
 BoxCollider:
