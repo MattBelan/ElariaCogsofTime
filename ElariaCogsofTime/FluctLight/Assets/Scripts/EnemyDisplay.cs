@@ -42,7 +42,7 @@ public class EnemyDisplay : MonoBehaviour
             RectTransform textPos = enemyHealth[i].GetComponent<RectTransform>();
             textPos.anchoredPosition = screenPos;
 
-            enemyHealth[i].enabled = cm.enemies[i].isCursorOver ? true : false; // only display numbers on hover
+            enemyHealth[i].enabled = cm.enemies[i].IsCursorOver ? true : false; // only display numbers on hover
         }
     }
 

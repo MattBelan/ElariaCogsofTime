@@ -24,6 +24,9 @@ public class PlayerScript : CombatEntity {
     //Pausing
     public bool playing;
 
+    //Player Specific Turn Logic
+    public bool turnTaken;
+
     // Use this for initialization
     public override void Start () 
     {
@@ -33,6 +36,7 @@ public class PlayerScript : CombatEntity {
         Moving = false;
         Attacking = false;
         usedAttack = false;
+        turnTaken = false;
         intendedAction = ActionIntent.Deciding;
 
         data = new SaveData();
@@ -141,13 +145,13 @@ public class PlayerScript : CombatEntity {
 
             comLog[2].text = comLog[1].text;
             comLog[1].text = comLog[0].text;
-            comLog[0].text = "Elaria took " + dam + " damage.";
+            comLog[0].text = id + " took " + dam + " damage.";
         }
         else
         {
             comLog[2].text = comLog[1].text;
             comLog[1].text = comLog[0].text;
-            comLog[0].text = "Elaria dodged an attack!";
+            comLog[0].text = id + " dodged an attack!";
         }
     }
 
@@ -190,21 +194,13 @@ public class PlayerScript : CombatEntity {
         }      
     }
 
-    public void Attack(EnemyScript enemy)
+    public EnemyScript Attack(EnemyScript enemy)
     {
         if (playing)
         {
             if (enemy != null)
             {
                 float dist = Vector3.Distance(transform.position, enemy.transform.position);
-                /*if (Attacking && !usedAttack)
-                {
-                    float dist = Vector3.Distance(transform.position, enemy.transform.position);
-
-                    if (dist <= range)
-                    {
-                        enemy.TakeDamage(damage);
-                        usedAttack = true;*/
 
                 if (dist <= range)
                 {
@@ -215,10 +211,13 @@ public class PlayerScript : CombatEntity {
                 
                     comLog[2].text = comLog[1].text;
                     comLog[1].text = comLog[0].text;
-                    comLog[0].text = "Elaria dealt " + damage + " damage.";
+                    comLog[0].text = id + " dealt " + damage + " damage.";
+
+                    return enemy;
                 }
             }
         }
+        return null;
     }
 
     IEnumerator Delay(int timeToWait) {
@@ -275,7 +274,6 @@ public class PlayerScript : CombatEntity {
         if (Input.GetMouseButtonDown(0))
         {
             combatManager.player = this;
-            combatManager.selectedPlayer = combatManager.playerCharacters.IndexOf(this);
         }
     }
 }

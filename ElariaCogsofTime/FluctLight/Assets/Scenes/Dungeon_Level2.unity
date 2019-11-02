@@ -1702,7 +1702,7 @@ Transform:
   - {fileID: 1008415201}
   - {fileID: 1784732714}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &61972098
 PrefabInstance:
@@ -2444,7 +2444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Bandit
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
@@ -2478,6 +2478,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &120117880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2502,8 +2503,8 @@ Transform:
   m_LocalPosition: {x: 20, y: 18, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 2034067843}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &132795948
 PrefabInstance:
@@ -3061,7 +3062,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &190959141
 PrefabInstance:
@@ -3575,7 +3576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Bandit
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
@@ -3609,6 +3610,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &232790529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3682,8 +3684,8 @@ Transform:
   m_LocalPosition: {x: 8, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 2034067843}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &232790533
 Animator:
@@ -4065,7 +4067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259139280663296, guid: 8efac91d9d50258498d94c1124e74e1c, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 212189197415321396, guid: 8efac91d9d50258498d94c1124e74e1c,
         type: 3}
@@ -4112,7 +4114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &262519310
 PrefabInstance:
@@ -4994,7 +4996,7 @@ Transform:
   - {fileID: 939859888}
   - {fileID: 1719100445}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &325822485
 PrefabInstance:
@@ -6401,15 +6403,18 @@ MonoBehaviour:
   playerCharacters:
   - {fileID: 1500752847}
   - {fileID: 891312509}
-  selectedPlayer: 0
+  deadPlayerCharacters: []
+  curPlayerIndex: 0
   enemies:
   - {fileID: 2135741159}
   - {fileID: 2019872595}
   - {fileID: 232790528}
   - {fileID: 1808556183}
   - {fileID: 120117879}
+  deadEnemies: []
   targetEnemy: {fileID: 0}
   cam: {fileID: 519420030}
+  delayTimer: 0
 --- !u!4 &398384639
 Transform:
   m_ObjectHideFlags: 0
@@ -6422,7 +6427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &398384640
 MonoBehaviour:
@@ -8513,9 +8518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db950cb5f4698674dbb5e93f511c053e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cameraHeight: -10
+  target: {fileID: 0}
+  cameraHeight: 0
   newViewSize: 0
+  transitionTime: 1.25
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -21091,7 +21097,7 @@ GameObject:
   - component: {fileID: 891312508}
   - component: {fileID: 891312507}
   m_Layer: 0
-  m_Name: SecondPlayerCharacter
+  m_Name: Milosh
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21223,6 +21229,7 @@ MonoBehaviour:
   - {fileID: 377314170}
   curLevel: 0
   playing: 0
+  turnTaken: 0
   abilityRadius: 2
   abilityRange: 8
   usingAbility: 0
@@ -21246,12 +21253,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891312506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: -2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 2034067843}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &891844630
 PrefabInstance:
@@ -25618,7 +25625,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1179036986
 PrefabInstance:
@@ -27181,7 +27188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4985325859376830, guid: a2eca58129b0bbb4c8eb71678aa0de12, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2eca58129b0bbb4c8eb71678aa0de12, type: 3}
@@ -28166,7 +28173,7 @@ PrefabInstance:
     - target: {fileID: 4530852480314745231, guid: 5517aa94cdcb2d84998301a5fbbb2830,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4530852480314745231, guid: 5517aa94cdcb2d84998301a5fbbb2830,
         type: 3}
@@ -29006,7 +29013,7 @@ Transform:
   - {fileID: 673442982}
   - {fileID: 1939465038}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1366497200
 PrefabInstance:
@@ -30727,7 +30734,7 @@ RectTransform:
   - {fileID: 2004985765}
   - {fileID: 1757676732}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -31212,6 +31219,7 @@ MonoBehaviour:
   - {fileID: 377314170}
   curLevel: 0
   playing: 0
+  turnTaken: 0
   abilityRadius: 2
 --- !u!212 &1500752848
 SpriteRenderer:
@@ -36827,7 +36835,7 @@ RectTransform:
   - {fileID: 639021058}
   - {fileID: 1520287121}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -36950,7 +36958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Bandit
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
@@ -36984,6 +36992,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &1808556184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37009,7 +37018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2034067843}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821316834
 GameObject:
@@ -63368,7 +63377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Bandit
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
@@ -63402,6 +63411,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &2019872596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63426,8 +63436,8 @@ Transform:
   m_LocalPosition: {x: 15, y: 6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 2034067843}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2023406442
 PrefabInstance:
@@ -63617,9 +63627,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1500752851}
+  - {fileID: 891312511}
   - {fileID: 1808556185}
+  - {fileID: 232790532}
+  - {fileID: 2135741161}
+  - {fileID: 2019872597}
+  - {fileID: 120117881}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2034473644
 PrefabInstance:
@@ -65401,7 +65416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a35cc5e3b67541a3bdd446bd8b7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: Bandit
   combatManager: {fileID: 0}
   lerpSpeed: 0
   lerpLength: 0
@@ -65435,6 +65450,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &2135741160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65459,8 +65475,8 @@ Transform:
   m_LocalPosition: {x: -1, y: 6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 2034067843}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2139750736
 PrefabInstance:

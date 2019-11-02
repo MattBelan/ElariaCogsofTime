@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
 
-    public GameObject player;
+    public GameObject target;
+    private GameObject prevTarget;
     private Camera cam;
     public float cameraHeight; //default -10
     public float newViewSize;
+    public float transitionTime = 1.25f;
     private float defaultViewSize;
 
     private bool attackZoom = false;
@@ -21,7 +23,7 @@ public class CameraScript : MonoBehaviour {
     
     void Awake()
     {
-        player = GameObject.FindWithTag("Player");
+        target = GameObject.FindWithTag("Player");
     }
 
 	// Initialization
@@ -34,16 +36,28 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        Vector3 newPos = player.transform.position;
-        newPos.z = cameraHeight;
-        transform.position = newPos;
-
-        if (zoomReset) {
-            ResetCameraZoom();
-        } else if (attackZoom) {
-            CameraZoom(newViewSize);
-        }
+        // if (zoomReset) {
+        //     ResetCameraZoom();
+        // } else if (attackZoom) {
+        //     CameraZoom(newViewSize);
+        // }
 	}
+
+    void FixedUpdate ()
+    {
+        Vector3 newPos = target.transform.position;
+        newPos.z = cameraHeight;
+        if (target) {
+            Vector2 vec = Vector2.Lerp(transform.position, target.transform.position, transitionTime * Time.deltaTime * 4);
+            transform.position = new Vector3(vec.x, vec.y, transform.position.z);
+        }
+    }
+
+    public void SetTarget (GameObject pTarget)
+    {
+        prevTarget = target ? target : pTarget;
+        target = pTarget;
+    }
 
     public void CameraZoom (float viewSize, float zoomTime = 0.5f) 
     {

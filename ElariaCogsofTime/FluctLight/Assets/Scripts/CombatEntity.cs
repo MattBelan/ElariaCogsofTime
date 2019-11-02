@@ -19,7 +19,7 @@ public class CombatEntity : MonoBehaviour
     //Lerp Variables and Properties
     public bool IsLerping { get; set; }
     public bool LerpStart { get; set; }
-    public bool isCursorOver { get; set; }
+    public bool IsCursorOver { get; set; }
     public float lerpSpeed;
     public float lerpLength;
     public float startTime;
@@ -62,8 +62,22 @@ public class CombatEntity : MonoBehaviour
     }
 
     // Update is called once per frame
-     public virtual void Update()
+    public virtual void Update()
     {
         
+    }
+
+    public virtual bool IsWithinRange(CombatEntity pTarget, float pRange)
+    {
+        if (pTarget) {
+            float distToPlayer = Vector3.Distance(transform.position, pTarget.transform.position);
+            return (distToPlayer <= pRange) 
+                ? true 
+                : false;
+        }
+        else {
+            //Debug.Log("Unassigned target for " + id + ".IsWithinRange(CombatEntity pTarget, float pRange) call");
+            return false;
+        }
     }
 }

@@ -9,7 +9,7 @@ public class EnemyScript : CombatEntity {
 
     //MAKE THIS A LIST
     public List<PlayerScript> players;
-    PlayerScript target;
+    public PlayerScript target;
 
     // Use this for initialization
     public override void Start () {
@@ -19,7 +19,7 @@ public class EnemyScript : CombatEntity {
         moveTotal = 5;
         Moving = false;
         IsAlive = true;
-        isCursorOver = false;
+        IsCursorOver = false;
 
         data = new SaveData();
 
@@ -107,11 +107,11 @@ public class EnemyScript : CombatEntity {
     void OnMouseOver()
     {
         combatManager.TargetHover(this);
-        isCursorOver = true;
+        IsCursorOver = true;
     }
     void OnMouseExit()
     {
-        isCursorOver = false;
+        IsCursorOver = false;
     }
 
     bool PlayerVisible()
@@ -220,17 +220,16 @@ public class EnemyScript : CombatEntity {
         }
     }
 
-    public void AIAttack()
+    public PlayerScript AIAttack()
     {
         if (PlayerVisible())
         {
-            float distToPlayer = Vector3.Distance(transform.position, target.transform.position);
-
-            if (distToPlayer <= range)
-            {
+            if (IsWithinRange(target, range)) {
                 target.TakeDamage(damage);
+                return target;
             }
         }
+        return null;
     }
 
     float AnimationFloat(Vector3 start, Vector3 end)
