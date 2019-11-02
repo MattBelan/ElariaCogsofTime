@@ -55,12 +55,13 @@ public class MageScript : PlayerScript
                 if (Vector3.Distance(targetLocation, enemy.transform.position) <= abilityRadius)
                 {
                     enemiesInRange.Add(enemy);
+                    Debug.Log(enemiesInRange.Count);
                 }
             }
 
             foreach (EnemyScript enemy in enemiesInRange)
             {
-                Attack(enemy);
+                enemy.TakeDamage(damage);
             }
 
             comLog[2].text = comLog[1].text;

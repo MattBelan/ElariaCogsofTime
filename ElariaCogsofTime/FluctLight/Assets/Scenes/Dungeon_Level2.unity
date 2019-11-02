@@ -6396,6 +6396,7 @@ MonoBehaviour:
   - {fileID: 444750248}
   - {fileID: 532590191}
   - {fileID: 639021059}
+  - {fileID: 1520287122}
   pauseMenu: {fileID: 1474900415}
   saving: {fileID: 398384640}
   player: {fileID: 1500752847}
@@ -10876,7 +10877,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 54336cde55a79644baadf83194b1ebdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46c8d37e256253d4da00de2a00eaf5ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21229,6 +21230,8 @@ MonoBehaviour:
   - {fileID: 377314170}
   curLevel: 0
   playing: 0
+  usedAbility: 0
+  abilityCooldown: 0
   turnTaken: 0
   abilityRadius: 2
   abilityRange: 8
@@ -31219,6 +31222,8 @@ MonoBehaviour:
   - {fileID: 377314170}
   curLevel: 0
   playing: 0
+  usedAbility: 0
+  abilityCooldown: 0
   turnTaken: 0
   abilityRadius: 2
 --- !u!212 &1500752848
@@ -31830,7 +31835,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 54336cde55a79644baadf83194b1ebdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42d7dd5d27cde024cb1e54398b18d470, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
