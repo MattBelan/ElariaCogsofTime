@@ -23,6 +23,8 @@ public class PlayerScript : CombatEntity {
 
     //Pausing
     public bool playing;
+    public bool usedAbility;
+    public int abilityCooldown;
 
     //Player Specific Turn Logic
     public bool turnTaken;
@@ -38,6 +40,8 @@ public class PlayerScript : CombatEntity {
         usedAttack = false;
         turnTaken = false;
         intendedAction = ActionIntent.Deciding;
+        usedAbility = false;
+        abilityCooldown = 0;
 
         data = new SaveData();
 
@@ -65,6 +69,15 @@ public class PlayerScript : CombatEntity {
         data.y = transform.position.y;
         data.z = transform.position.z;
         data.currentMove = currentMove;
+
+        if (abilityCooldown > 0)
+        {
+            usedAbility = true;
+        }
+        else
+        {
+            usedAbility = false;
+        }
 
         if (playing)
         {

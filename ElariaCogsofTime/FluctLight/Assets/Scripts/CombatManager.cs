@@ -327,6 +327,7 @@ public class CombatManager : MonoBehaviour {
                     p.turnTaken = false;
                     p.currentMove = 0;
                     p.dodge = p.startDodge;
+                    p.abilityCooldown -= 1;
                     curPlayerIndex = 0;
                 }
                 // Reset Enemy Values
@@ -362,6 +363,15 @@ public class CombatManager : MonoBehaviour {
         }
         else {
             buttons[2].interactable = true;
+        }
+        //Ability
+        if (player.usedAbility)
+        {
+            buttons[4].interactable = false;
+        }
+        else
+        {
+            buttons[4].interactable = true;
         }
 	}
 

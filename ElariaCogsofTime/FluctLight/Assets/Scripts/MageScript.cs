@@ -28,6 +28,11 @@ public class MageScript : PlayerScript
                 Vector3 mousePos = combatManager.cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = -1;
                 ElementalBlast(mousePos);
+                abilityCooldown = 3;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                usingAbility = false;
             }
         }
     }
@@ -61,6 +66,8 @@ public class MageScript : PlayerScript
             comLog[2].text = comLog[1].text;
             comLog[1].text = comLog[0].text;
             comLog[0].text = "Milosh used Elemental Blast!";
+
+            usingAbility = false;
         }
     }
 }

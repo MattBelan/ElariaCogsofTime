@@ -42,6 +42,8 @@ public class FighterScript : PlayerScript
             comLog[2].text = comLog[1].text;
             comLog[1].text = comLog[0].text;
             comLog[0].text = "Elaria used Flurry of Blades!";
+
+            abilityCooldown = 3;
         }
     }
 }
