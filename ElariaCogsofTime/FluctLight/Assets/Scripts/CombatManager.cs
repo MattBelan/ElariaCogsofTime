@@ -160,6 +160,12 @@ public class CombatManager : MonoBehaviour {
             TogglePause();
         }
 
+        //Clear all Enemies Failsafe
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            enemies.Clear();
+        }
+
         //checking if level is complete
         if (enemies.Count <= 0) {
             if(SceneManager.GetActiveScene().name == "Dungeon_Level1") {

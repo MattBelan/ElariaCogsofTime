@@ -1898,42 +1898,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1365760134485116, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8195094280917583424, guid: 4f29661633067aa45bf54a13fd148a67,
         type: 3}
       propertyPath: m_Tiles.Array.data[313].second.m_TileIndex
@@ -3706,6 +3670,42 @@ PrefabInstance:
       propertyPath: m_TileSpriteArray.Array.data[18].m_Data
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134962357034044, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365760134485116, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f29661633067aa45bf54a13fd148a67, type: 3}
 --- !u!1001 &276299385
@@ -4433,13 +4433,16 @@ MonoBehaviour:
   playerCharacters:
   - {fileID: 1726814317}
   - {fileID: 1839524751}
-  selectedPlayer: 0
+  deadPlayerCharacters: []
+  curPlayerIndex: 0
   enemies:
   - {fileID: 732316784}
   - {fileID: 1289651421}
   - {fileID: 1508674291}
+  deadEnemies: []
   targetEnemy: {fileID: 0}
   cam: {fileID: 519420030}
+  delayTimer: 0
 --- !u!4 &398384639
 Transform:
   m_ObjectHideFlags: 0
@@ -5947,9 +5950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db950cb5f4698674dbb5e93f511c053e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  target: {fileID: 0}
   cameraHeight: -10
   newViewSize: 0
+  transitionTime: 1.25
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -7641,6 +7645,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &732316785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13016,6 +13021,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &1289651422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14946,6 +14952,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 5518234532697467165, guid: 1414b1c53a9150a4e9098f05393282b7,
     type: 3}
   players: []
+  target: {fileID: 0}
 --- !u!65 &1508674292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15942,7 +15949,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 54336cde55a79644baadf83194b1ebdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46c8d37e256253d4da00de2a00eaf5ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16795,6 +16802,7 @@ MonoBehaviour:
   playing: 0
   usedAbility: 0
   abilityCooldown: 0
+  turnTaken: 0
   abilityRadius: 2
   abilityRange: 8
   usingAbility: 0
@@ -18014,6 +18022,7 @@ MonoBehaviour:
   playing: 0
   usedAbility: 0
   abilityCooldown: 0
+  turnTaken: 0
   abilityRadius: 2
 --- !u!65 &1839524752
 BoxCollider:
@@ -20954,7 +20963,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 54336cde55a79644baadf83194b1ebdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42d7dd5d27cde024cb1e54398b18d470, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
