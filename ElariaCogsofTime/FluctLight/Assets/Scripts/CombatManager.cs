@@ -268,7 +268,12 @@ public class CombatManager : MonoBehaviour {
                 switch (turnPhase) 
                 {
                     case TurnState.Character: {
-                        // Space for any preliminary turn logic we want to add
+                            // Space for any preliminary turn logic we want to add
+                            if (!enemies[curEnemyIndex].IsAlive)
+                            {
+                                turnPhase = TurnState.Result;
+                            }
+
                         cam.SetTarget(enemies[curEnemyIndex].gameObject);
                         Debug.Log("Enemy " + curEnemyIndex + " deciding");
                         targetEnemy = enemies[curEnemyIndex];
