@@ -153,6 +153,7 @@ public class EnemyScript : CombatEntity {
     {
         if (PlayerVisible())
         {
+            Debug.Log("(Movement)" + id + "is targeting " + target.id);
             float distToPlayer = Vector3.Distance(transform.position, target.transform.position);
             if (range < distToPlayer)
             {
@@ -222,6 +223,7 @@ public class EnemyScript : CombatEntity {
 
     public PlayerScript AIAttack()
     {
+        Debug.Log("(Attack)" + id + "is targeting " + target.id);
         if (PlayerVisible())
         {
             if (IsWithinRange(target, range)) {
