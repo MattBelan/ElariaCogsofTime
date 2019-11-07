@@ -55,7 +55,7 @@ public class MageScript : PlayerScript
                 if (Vector3.Distance(targetLocation, enemy.transform.position) <= abilityRadius)
                 {
                     enemiesInRange.Add(enemy);
-                    Debug.Log(enemiesInRange.Count);
+                    // Debug.Log(enemiesInRange.Count);
                 }
             }
 

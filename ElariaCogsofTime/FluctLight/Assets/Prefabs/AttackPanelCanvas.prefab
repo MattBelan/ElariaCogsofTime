@@ -151,7 +151,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2136828573
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 1614842946001411275, guid: 62a0d5a892e95004683cfe26a400f175,
     type: 3}
@@ -386,12 +386,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiElement: {fileID: 0}
+  playFadeIn: 0
+  fadeInTime: 0.6
+  playFadeOut: 0
+  fadeOutTime: 0.6
   sprites:
   - {fileID: 4530852480859002022}
   - {fileID: 4530852479313745397}
-  lateStart: 1
-  dismissPanel: 0
-  displayPanel: 0
+  dismiss: 0
+  dismissAfterDelay: 0
+  destroy: 0
+  destroyAfterDelay: 0
+  dismissTimer: 1
+  destroyTimer: 1
+  dynamicHealthVal: 0
 --- !u!1 &4530852479979075552
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +582,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1717012049
+  m_SortingOrder: -10
   m_TargetDisplay: 0
 --- !u!114 &4530852480314745225
 MonoBehaviour:
@@ -767,7 +775,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2136828573
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -1204028294814347309, guid: 0d3b09f1a7d1eb145aff78da3182f28b,
     type: 3}

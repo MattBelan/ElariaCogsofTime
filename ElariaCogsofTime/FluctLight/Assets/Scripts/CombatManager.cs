@@ -26,7 +26,8 @@ public class CombatManager : MonoBehaviour {
     /// </summary>
     TurnState turnPhase;
 
-    public Canvas playerCanvas;
+    public Canvas mainOverlayCanvas;
+    public Canvas combatLogCanvas;
 
     // Attack Panel Canvas
     public Canvas attackPanelCanvas;
@@ -207,6 +208,15 @@ public class CombatManager : MonoBehaviour {
                         player = playerCharacters[curPlayerIndex];
                         displayStart = true;
                         turnPhase = TurnState.Action;
+                        // Debug.Log("Health Values:");
+                        // foreach (CombatEntity player in playerCharacters) 
+                        // {   
+                        //     Debug.Log(player.id + "-" + player.Health + "/" + player.MaxHealth);
+                        // }               
+                        // foreach (CombatEntity enemy in enemies) 
+                        // {   
+                        //     Debug.Log(enemy.id + "-" + enemy.Health + "/" + enemy.MaxHealth);
+                        // }               
                         break;
                     }
                     case TurnState.Action: {
@@ -218,7 +228,7 @@ public class CombatManager : MonoBehaviour {
                     }
                     case TurnState.Display: {
 
-                        DisplayPanelStart(true);
+                        DisplayPanelStart(player, targetEnemy, true);
                         
                         // Decrement timer
                         attackDisplayTime -= Time.deltaTime;
@@ -250,10 +260,8 @@ public class CombatManager : MonoBehaviour {
                         // If so, then enemies may go. Otherwise, auto switch to the next player character
                         if (playerTurnsFinished) {
                             roundState = RoundState.Enemy;
-                            Debug.Log("Enemy");
                         } 
                         else {
-                            Debug.Log("Next");
                             SelectNextPC();
                         }
                         delayTimer = 1.0f;
@@ -276,8 +284,7 @@ public class CombatManager : MonoBehaviour {
                             }
 
                         cam.SetTarget(enemies[curEnemyIndex].gameObject);
-                        Debug.Log("Enemy " + curEnemyIndex + " deciding");
-                        Debug.Log(enemies[curEnemyIndex].IsAlive);
+                        // Debug.Log("Enemy " + curEnemyIndex + " deciding");
                         targetEnemy = enemies[curEnemyIndex];
                         displayStart = true;
                         turnPhase = TurnState.Action;
@@ -295,7 +302,7 @@ public class CombatManager : MonoBehaviour {
                     }
                     case TurnState.Display: {
                         // Setup Panel (boolean determines whether or not we are showing a player attack or enemy attack)
-                        DisplayPanelStart(false); 
+                        DisplayPanelStart(targetEnemy.target, targetEnemy, false); 
                         
                         // Decrement timer
                         attackDisplayTime -= Time.deltaTime;
@@ -321,7 +328,6 @@ public class CombatManager : MonoBehaviour {
                         curEnemyIndex++;
                         if (curEnemyIndex >= enemies.Count) {
                             roundState = RoundState.Reset;
-                            Debug.Log("Enemy Round Finished");
                             break;
                         }
                         delayTimer = 1.0f;
@@ -388,7 +394,7 @@ public class CombatManager : MonoBehaviour {
         }
 	}
 
-    public void DisplayPanelStart(bool pPlayerAttacking)
+    public void DisplayPanelStart(CombatEntity pPlayer, CombatEntity pEnemy, bool pPlayerAttacking)
     {
         if (displayStart) // Do this once
         {    
@@ -397,10 +403,10 @@ public class CombatManager : MonoBehaviour {
             AttackPanelScript panelScript = attackPanelCanvas.GetComponentInChildren<AttackPanelScript>();
 
             // Set appropriate sprites
-            SetSprites(player, targetEnemy, pPlayerAttacking);
+            SetSprites(pPlayer, pEnemy, pPlayerAttacking);
 
             // Set health values
-            SetPanelHealth(panelScript, player, targetEnemy, pPlayerAttacking);                           
+            SetPanelHealth(panelScript, pPlayer, pEnemy, pPlayerAttacking);                           
 
             // Fade in and fade out attributes
             panelScript.playFadeIn = true;
@@ -408,7 +414,7 @@ public class CombatManager : MonoBehaviour {
             panelScript.dismissAfterDelay = true;
 
             attackDisplayTime = panelScript.fadeInTime + panelScript.fadeOutTime 
-                            + GetDisplayDuration(RoundState.Player, player.intendedAction);
+                            + GetDisplayDuration(RoundState.Player, pPlayer.intendedAction);
                         
             panelScript.dismissTimer = attackDisplayTime - 0.75f;
 
@@ -440,21 +446,6 @@ public class CombatManager : MonoBehaviour {
 
         return calculatedTime + 3.25f; // extra delay
     }
-
-    public void SetDisplayAnimations(GameObject pAttackPanel, string pAttackerAnimation, string pTargetAnimation)
-    {
-        Animator[] anims = pAttackPanel.GetComponentsInChildren<Animator>();
-        if (anims.Length > 0) {
-            foreach (Animator anim in anims) 
-            {
-                if ("PlayerSprite" == anim.gameObject.name) {
-                    anim.SetBool("BasicAttack", true); // Actual value in animator component
-                }
-            }
-            return;
-        }
-        Debug.Log("Combat Manager - Animations: Display Animation Error");
-    }    
     
     public void SetSprites(CombatEntity pPlayer, CombatEntity pEnemy, bool pPlayerAttacking)
     {
@@ -486,17 +477,24 @@ public class CombatManager : MonoBehaviour {
 
         // Play animations
         if (pPlayerAttacking)
-            StartCoroutine(EntityAttack(1.5f, playerSpriteAnim, enemySpriteAnim, /*pPlayer.id*/ "Elaria", pEnemy.id, "_Attack_Basic"));
+            StartCoroutine(EntityAttack(1.5f, playerSpriteAnim, enemySpriteAnim, pPlayer.id, pEnemy.id, "_Attack_Basic"));
         else 
             StartCoroutine(EntityAttack(1.5f, enemySpriteAnim, playerSpriteAnim, pEnemy.id, pPlayer.id, "_Attack_Basic"));
     }
     
     IEnumerator EntityAttack(float pWaitTime, Animator pAttackerAnim, Animator pTargetAnim, string pAttackerName, string pTargetName, string pAction)
     {
+        // Start w/ idle anims
+        pAttackerAnim.Play(pAttackerName + "_Idle");
+        pTargetAnim.Play(pTargetName + "_Idle");
+
+        // Set attack anims
         if ("_Attack_Basic" == pAction) {
             yield return new WaitForSeconds(pWaitTime);
             pAttackerAnim.Play(pAttackerName + pAction);
-            yield return new WaitForSeconds(anims.animationLibrary[pAttackerName + pAction].duration);
+            if (anims.animationLibrary[pAttackerName + pAction] != null) {
+                yield return new WaitForSeconds(anims.animationLibrary[pAttackerName + pAction].duration);
+            }
             //pTargetAnim.Play(pTargetName + "_Damaged"); // Animation DNE yet
             //yield return new WaitForSeconds(anims.animationLibrary[pTargetName + "_Damaged].duration); // Animation DNE yet
             yield break;

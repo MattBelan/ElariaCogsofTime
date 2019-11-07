@@ -44,6 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Indicators
+    uniqueID: 2118272485
+    locked: 0
+  - name: CombatLog
+    uniqueID: 1393941051
+    locked: 0
   - name: UI
     uniqueID: 2577955247
     locked: 0
