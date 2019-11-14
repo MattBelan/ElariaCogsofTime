@@ -2458,6 +2458,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 0
   startDodge: 0
+  armor: 0
   animator: {fileID: 120117878}
   animFloat: 0
   data:
@@ -2479,6 +2480,7 @@ MonoBehaviour:
     type: 3}
   players: []
   target: {fileID: 0}
+  potentialDrops: []
 --- !u!65 &120117880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2838,7 +2840,7 @@ GameObject:
   - component: {fileID: 160666745}
   - component: {fileID: 160666744}
   m_Layer: 0
-  m_Name: Text
+  m_Name: PauseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3590,6 +3592,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 0
   startDodge: 0
+  armor: 0
   animator: {fileID: 232790533}
   animFloat: 0
   data:
@@ -3611,6 +3614,7 @@ MonoBehaviour:
     type: 3}
   players: []
   target: {fileID: 0}
+  potentialDrops: []
 --- !u!65 &232790529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6486,6 +6490,7 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   cam: {fileID: 519420030}
   delayTimer: 0
+  inventory: []
 --- !u!4 &398384639
 Transform:
   m_ObjectHideFlags: 0
@@ -8431,7 +8436,7 @@ GameObject:
   - component: {fileID: 517700535}
   - component: {fileID: 517700534}
   m_Layer: 0
-  m_Name: Button (2)
+  m_Name: Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21424,6 +21429,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 5
   startDodge: 5
+  armor: 0
   animator: {fileID: 891312508}
   animFloat: 0
   data:
@@ -21459,6 +21465,7 @@ MonoBehaviour:
   usedAbility: 0
   abilityCooldown: 0
   turnTaken: 0
+  gear: []
   abilityRadius: 2
   abilityRange: 8
   usingAbility: 0
@@ -29742,7 +29749,7 @@ GameObject:
   - component: {fileID: 1413287591}
   - component: {fileID: 1413287590}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30273,7 +30280,7 @@ GameObject:
   - component: {fileID: 1428716907}
   - component: {fileID: 1428716906}
   m_Layer: 0
-  m_Name: Button (1)
+  m_Name: Save
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31421,6 +31428,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 5
   startDodge: 5
+  armor: 0
   animator: {fileID: 1500752849}
   animFloat: 0
   data:
@@ -31456,6 +31464,7 @@ MonoBehaviour:
   usedAbility: 0
   abilityCooldown: 0
   turnTaken: 0
+  gear: []
   abilityRadius: 2
 --- !u!212 &1500752848
 SpriteRenderer:
@@ -36284,7 +36293,7 @@ GameObject:
   - component: {fileID: 1757676734}
   - component: {fileID: 1757676733}
   m_Layer: 0
-  m_Name: Button (4)
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37200,6 +37209,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 0
   startDodge: 0
+  armor: 0
   animator: {fileID: 1808556182}
   animFloat: 0
   data:
@@ -37221,6 +37231,7 @@ MonoBehaviour:
     type: 3}
   players: []
   target: {fileID: 0}
+  potentialDrops: []
 --- !u!65 &1808556184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63238,7 +63249,7 @@ GameObject:
   - component: {fileID: 2004985767}
   - component: {fileID: 2004985766}
   m_Layer: 0
-  m_Name: Button (3)
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63620,6 +63631,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 0
   startDodge: 0
+  armor: 0
   animator: {fileID: 2019872594}
   animFloat: 0
   data:
@@ -63641,6 +63653,7 @@ MonoBehaviour:
     type: 3}
   players: []
   target: {fileID: 0}
+  potentialDrops: []
 --- !u!65 &2019872596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65659,6 +65672,7 @@ MonoBehaviour:
   usedAttack: 0
   dodge: 0
   startDodge: 0
+  armor: 0
   animator: {fileID: 2135741158}
   animFloat: 0
   data:
@@ -65680,6 +65694,7 @@ MonoBehaviour:
     type: 3}
   players: []
   target: {fileID: 0}
+  potentialDrops: []
 --- !u!65 &2135741160
 BoxCollider:
   m_ObjectHideFlags: 0

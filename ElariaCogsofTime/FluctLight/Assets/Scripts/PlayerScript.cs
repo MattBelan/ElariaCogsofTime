@@ -29,6 +29,9 @@ public class PlayerScript : CombatEntity {
     //Player Specific Turn Logic
     public bool turnTaken;
 
+    //Equipment
+    public List<Equipment> gear;
+
     // Use this for initialization
     public override void Start () 
     {
@@ -264,11 +267,6 @@ public class PlayerScript : CombatEntity {
         }
 
         return animation;
-    }
-
-    public void FindPath(Vector3 start, Vector3 end)
-    {
-
     }
 
     public virtual void UseAbility()

@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: ef1e5dec49c4862468b347c6c256fd8a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Overworld.unity
     guid: 1f884aff262e8b8479509cb050381de2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dungeon_Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

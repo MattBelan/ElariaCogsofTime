@@ -66,7 +66,8 @@ public class CombatManager : MonoBehaviour {
 
     public float delayTimer;
 
-
+    //Loot/Inventory
+    public List<Equipment> inventory;
 
     void Awake()
     {
@@ -91,6 +92,9 @@ public class CombatManager : MonoBehaviour {
 
         // Stats
         player.Health = 20;
+
+        //Inventory
+        inventory = new List<Equipment>();
         
         // Scene Management
         if (PlayerPrefs.GetInt("Loading") > 0) {
@@ -662,7 +666,6 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    
     public void SelectNextPC()
     {
         curPlayerIndex = playerCharacters.IndexOf(player);
@@ -680,4 +683,8 @@ public class CombatManager : MonoBehaviour {
         player.Dodge();
     }
     
+    public void DisplayInventory()
+    {
+
+    }
 }

@@ -34,6 +34,7 @@ public class CombatEntity : MonoBehaviour
     public bool usedAttack;
     public float dodge;
     public float startDodge;
+    public float armor;
 
     //Animator
     public Animator animator;
