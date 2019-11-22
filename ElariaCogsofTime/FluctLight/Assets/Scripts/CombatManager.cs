@@ -281,17 +281,25 @@ public class CombatManager : MonoBehaviour {
                 {
                     case TurnState.Character: {
                             // Space for any preliminary turn logic we want to add
-                            if (!enemies[curEnemyIndex].IsAlive)
+                            if (curEnemyIndex < enemies.Count) 
                             {
-                                deadEnemies.Add(enemies[curEnemyIndex]);
-                                enemies.Remove(enemies[curEnemyIndex]);
-                            }
+                                if (!enemies[curEnemyIndex].IsAlive)
+                                {
+                                    deadEnemies.Add(enemies[curEnemyIndex]);
+                                    enemies.Remove(enemies[curEnemyIndex]);
+                                }
 
-                        cam.SetTarget(enemies[curEnemyIndex].gameObject);
-                        // Debug.Log("Enemy " + curEnemyIndex + " deciding");
-                        targetEnemy = enemies[curEnemyIndex];
-                        displayStart = true;
-                        turnPhase = TurnState.Action;
+                                    cam.SetTarget(enemies[curEnemyIndex].gameObject);
+                                // Debug.Log("Enemy " + curEnemyIndex + " deciding");
+                                targetEnemy = enemies[curEnemyIndex];
+                                displayStart = true;
+                                turnPhase = TurnState.Action;
+                            }
+                            else
+                            {
+                                turnPhase = TurnState.Result;
+                            }
+                            
                         break;
                     }
                     case TurnState.Action: {
