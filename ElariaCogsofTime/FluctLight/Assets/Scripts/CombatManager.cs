@@ -176,6 +176,10 @@ public class CombatManager : MonoBehaviour {
             if(SceneManager.GetActiveScene().name == "Dungeon_Level1") {
                 SceneManager.LoadScene("Dungeon_Level2");
             }
+            else if (SceneManager.GetActiveScene().name == "Dungeon_Level2")
+            {
+                SceneManager.LoadScene("Dungeon_Level3");
+            }
             else {
                 SceneManager.LoadScene("MainMenu");
             }

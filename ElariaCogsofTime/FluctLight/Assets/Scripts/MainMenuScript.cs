@@ -25,7 +25,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         PlayerPrefs.SetInt("Loading", 0);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Overworld");
+        SceneManager.LoadScene("Dungeon_Level1");
     }
     public void Quit()
     {
