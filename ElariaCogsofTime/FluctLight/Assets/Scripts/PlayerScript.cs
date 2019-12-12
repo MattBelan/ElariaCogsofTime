@@ -39,6 +39,7 @@ public class PlayerScript : CombatEntity {
         currentMove = 0;
         Health = 20;
         MaxHealth = Health;
+        displayHealth = Health;
         Moving = false;
         Attacking = false;
         usedAttack = false;
@@ -54,11 +55,16 @@ public class PlayerScript : CombatEntity {
         lerpSpeed = 1.0f;
         animFloat = 0;
         playing = true;
+
+        // Call after health values are set
+        CreateHeathBar();
     }
 	
 	// Update is called once per frame
 	public override void Update () 
     {
+        base.Update();
+
         data.health = Health;
         data.x = transform.position.x;
         data.y = transform.position.y;

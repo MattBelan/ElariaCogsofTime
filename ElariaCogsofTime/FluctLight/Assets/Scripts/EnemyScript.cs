@@ -18,6 +18,7 @@ public class EnemyScript : CombatEntity {
         base.Start();
         Health = 10;
         MaxHealth = Health;
+        displayHealth = Health;
         currentMove = 0;
         moveTotal = 5;
         Moving = false;
@@ -35,11 +36,16 @@ public class EnemyScript : CombatEntity {
 
         players = combatManager.playerCharacters;
         target = null;
+
+        // Call after health values are set
+        CreateHeathBar();
     }
 	
 	// Update is called once per frame
 	public override void Update () 
     {
+        base.Update();
+
         data.health = Health;
         data.x = transform.position.x;
         data.y = transform.position.y;

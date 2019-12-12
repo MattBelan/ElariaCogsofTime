@@ -54,14 +54,15 @@ public class CombatEntity : MonoBehaviour
 
     //Health Bar
     public HealthBar healthDisplay;
+    protected float displayHealth;
     public GameObject healthPrefab;
 
     // Start is called before the first frame update
     public virtual void Start()
-    {
-        // Setuo healthbar
+    {   
+        // Healthbar
         healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity).GetComponent<HealthBar>();
-        healthDisplay.SetupHealthBar(Health, MaxHealth);
+
         // Stats
         startDodge = dodge;
     }
@@ -69,14 +70,12 @@ public class CombatEntity : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        // Follow entity
-        Vector3 newScale = healthDisplay.transform.localScale;
-        newScale.x = Health / 10;
-        healthDisplay.transform.localScale = newScale;
-
-        if (Health != healthDisplay.currentHealth) {
-            healthDisplay.currentHealth = Health;
-        }
+        // Healthbar ~ Set Scale
+        //Debug.Log("Health: " + Health + " / " + displayHealth + " / " + MaxHealth + " - " + newScale.x);
+        //float actualScaleVal = 2 * (displayHealth / MaxHealth);
+        //healthDisplay.SetHealth(actualScaleVal);
+        // Healthbar - Set Position
+        healthDisplay.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
     }
 
     public virtual bool IsWithinRange(CombatEntity pTarget, float pRange)
@@ -96,5 +95,35 @@ public class CombatEntity : MonoBehaviour
     public virtual void TakeDamage(float dam)
     {
         Health -= dam;
+    }
+
+    public void CreateHeathBar()
+    {   
+        healthDisplay.SetStartVals(2);
+        FunctionPeriodic.Create(() => {
+            if (displayHealth > 0.01f) {
+                if (displayHealth > Health + 0.01f) {
+                    // Debug.Log("Health: " + Health + " / " + displayHealth + " / " + MaxHealth);
+                    displayHealth -= .01f;
+                    healthDisplay.SetHealth(2 * (displayHealth / MaxHealth));
+                }
+               
+                // At 30% health
+                if (displayHealth / MaxHealth < .3f) {
+                    if ((int)((displayHealth / MaxHealth) * 100f) % 3 == 0) {
+                        Debug.Log(" d-d " + displayHealth);
+                        healthDisplay.SetColor(Color.white);
+                    }
+                    else {
+                        Debug.Log(displayHealth);
+                        healthDisplay.SetColor(Color.red);
+                    }
+                }
+                // At 60% health
+                else if (displayHealth / MaxHealth < .6f) {
+                    healthDisplay.SetColor(Color.red);
+                }
+            }
+        }, .05f);
     }
 }

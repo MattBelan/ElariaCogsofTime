@@ -448,7 +448,7 @@ public class CombatManager : MonoBehaviour {
         if (round == RoundState.Player) 
         {
             calculatedTime += // If this animation is present, get its duration
-                anims.animationLibrary.ContainsKey("Elaria_Attack_Basic")
+                anims.animationLibrary.ContainsKey(playerCharacters[curPlayerIndex].name + "_Attack_Basic")
                     ? anims.animationLibrary["Elaria_Attack_Basic"].duration
                     : 0.0f;
         } 
