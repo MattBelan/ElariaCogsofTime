@@ -47,7 +47,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 127
+  controlID: 102
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -94,8 +94,8 @@ MonoBehaviour:
     y: 0
     width: 402
     height: 584
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 222}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 128
+  controlID: 103
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 129
+  controlID: 104
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -501,20 +501,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\smart\OneDrive\Documents\School\RIT\GDD Production Studio\ElariaCogsofTime\ElariaCogsofTime\FluctLight
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 86}
-    m_SelectedIDs: 3c2c0000
-    m_LastClickedID: 11324
-    m_ExpandedIDs: 00000000c82b0000e02b00009c2c0000222d0000842d0000d62d0000fa2d0000c42e0000da2e00009c2f000044320000363300007a33000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 5e340000
+    m_LastClickedID: 13406
+    m_ExpandedIDs: 00000000162d0000d62d00005a2e0000bc2e00000e2f0000302f0000e62f0000443300001a3400005e34000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -542,7 +542,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c82b00009c2c0000222d0000842d0000d62d0000fa2d0000c42e000044320000363300007a330000
+    m_ExpandedIDs: 00000000162d0000d62d00005a2e0000bc2e00000e2f0000302f0000e62f0000443300001a3400005e340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -662,20 +662,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d4c40000
-      m_LastClickedID: 50388
-      m_ExpandedIDs: 3c72ffffb079ffff9888ffff8691ffffbe91fffff691ffff0a9bffff7eb5ffffb2b5ffffe6b5ffffd0beffffb4cdffff24d5ffff08e4ffffc8ecffff8cfbfffff685000032c00000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: e8c7feff12c8feff48d2feff12e1feff16e1feff32e1feff3ef5feff68f5feff9efffeff680effff6c0effff880effff8216fffff21dffff421effff7a1effffb21effffa027ffff8836fffffc3dffff3a4dffffae54ffff9663ffff846cffff987affff2a8affffb892ffff22a5ffff24afffff0cbeffff80c5ffff68d4ffffc4deffff74e3ffff84ebffffdafaffffe0430000384d00008c5000009e7a0000907b0000d07b0000b67c0000d27d0000027e0000d27e0000ee8700006a8c0000948c0000c48c00003a8e0000648f000098b20000b4b30000e4b3000098c200000ec40000c6d20000f4d200002cd4000040d40000a0d40000f4d400001cfd000092fe0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Canvas
-        m_OriginalName: Canvas
+        m_Name: Sprites
+        m_OriginalName: Sprites
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 34294
+        m_UserData: 93336
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -724,9 +724,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.200451, y: 2.1598442, z: -3.0664062}
+    m_Target: {x: 4.8786516, y: 2.0163627, z: -27.530405}
     speed: 2
-    m_Value: {x: -2.200451, y: 2.1598442, z: -3.0664062}
+    m_Value: {x: 4.8673644, y: 2.1661754, z: -27.48667}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -759,9 +759,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 9.955851
+    m_Target: 11.591024
     speed: 2
-    m_Value: 10.424974
+    m_Value: 12.137198
   m_Ortho:
     m_Target: 1
     speed: 2

@@ -54,6 +54,7 @@ public class EnemyScript : CombatEntity {
 
         if (Health <= 0)
         {
+            healthDisplay.gameObject.SetActive(false);
             IsAlive = false;
             gameObject.SetActive(false);
         }
