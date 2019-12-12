@@ -12,7 +12,9 @@ public class EnemyScript : CombatEntity {
     public PlayerScript target;
 
     // Use this for initialization
-    public override void Start () {
+    public override void Start () 
+    {
+        base.Start();
         Health = 10;
         MaxHealth = Health;
         currentMove = 0;
@@ -29,21 +31,14 @@ public class EnemyScript : CombatEntity {
         animFloat = 0;
 
         combatManager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
-        healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
-        healthBar = healthDisplay.transform.GetChild(1).gameObject;
-        healthDisplay.transform.SetParent(transform);
 
         players = combatManager.playerCharacters;
         target = null;
     }
 	
 	// Update is called once per frame
-	public override void Update () {
-        //health bar
-        Vector3 newScale = healthBar.transform.localScale;
-        newScale.x = Health / 10;
-        healthBar.transform.localScale = newScale;
-
+	public override void Update () 
+    {
         data.health = Health;
         data.x = transform.position.x;
         data.y = transform.position.y;
@@ -97,11 +92,6 @@ public class EnemyScript : CombatEntity {
         {
             animator.SetInteger("Direction", 0);
         }
-    }
-
-    public void TakeDamage(float dam)
-    {
-        Health -= dam;
     }
 
     void OnMouseOver()

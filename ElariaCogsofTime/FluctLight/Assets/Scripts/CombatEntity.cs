@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 
 // Parent Class for all combat entities, including player characters and enemy characters
@@ -51,20 +52,30 @@ public class CombatEntity : MonoBehaviour
     public Vector3 lerpEnd;
 
     //Health Bar
-    public GameObject healthDisplay;
-    public GameObject healthBar;
+    public HealthBar healthDisplay;
     public GameObject healthPrefab;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
+        // Setuo healthbar
+        healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity).GetComponent<HealthBar>();
+        healthDisplay.SetupHealthBar(Health, MaxHealth);
+        // Stats
         startDodge = dodge;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        
+        // Follow entity
+        Vector3 newScale = healthDisplay.transform.localScale;
+        newScale.x = Health / 10;
+        healthDisplay.transform.localScale = newScale;
+
+        if (Health != healthDisplay.currentHealth) {
+            healthDisplay.currentHealth = Health;
+        }
     }
 
     public virtual bool IsWithinRange(CombatEntity pTarget, float pRange)
@@ -79,5 +90,10 @@ public class CombatEntity : MonoBehaviour
             //Debug.Log("Unassigned target for " + id + ".IsWithinRange(CombatEntity pTarget, float pRange) call");
             return false;
         }
+    }
+
+    public virtual void TakeDamage(float dam)
+    {
+        Health -= dam;
     }
 }

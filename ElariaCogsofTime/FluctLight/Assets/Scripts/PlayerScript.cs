@@ -32,6 +32,7 @@ public class PlayerScript : CombatEntity {
     // Use this for initialization
     public override void Start () 
     {
+        base.Start();
         currentMove = 0;
         Health = 20;
         MaxHealth = Health;
@@ -50,20 +51,11 @@ public class PlayerScript : CombatEntity {
         lerpSpeed = 1.0f;
         animFloat = 0;
         playing = true;
-
-        healthDisplay = Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y + .65f, transform.position.z), Quaternion.identity);
-        healthBar = healthDisplay.transform.GetChild(1).gameObject;
-        healthDisplay.transform.SetParent(transform);
     }
 	
 	// Update is called once per frame
 	public override void Update () 
     {
-        //health bar
-        Vector3 newScale = healthBar.transform.localScale;
-        newScale.x = Health / 20;
-        healthBar.transform.localScale = newScale;
-
         data.health = Health;
         data.x = transform.position.x;
         data.y = transform.position.y;
@@ -149,7 +141,7 @@ public class PlayerScript : CombatEntity {
         selector.transform.position = new Vector3(200, 200, 0);
     }
 
-    public void TakeDamage(float dam)
+    public override void TakeDamage(float dam)
     {
         if(UnityEngine.Random.Range(0.0f, 100.0f)>=dodge)
         {
