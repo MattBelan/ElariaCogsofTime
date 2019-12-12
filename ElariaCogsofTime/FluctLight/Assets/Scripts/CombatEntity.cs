@@ -75,6 +75,10 @@ public class CombatEntity : MonoBehaviour
         //float actualScaleVal = 2 * (displayHealth / MaxHealth);
         //healthDisplay.SetHealth(actualScaleVal);
         // Healthbar - Set Position
+        healthDisplay.SetHealth(2 * (Health / MaxHealth));
+        if (Health / MaxHealth < .6f) {
+            healthDisplay.SetColor(Color.red);
+        }
         healthDisplay.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
     }
 
@@ -100,30 +104,30 @@ public class CombatEntity : MonoBehaviour
     public void CreateHeathBar()
     {   
         healthDisplay.SetStartVals(2);
-        FunctionPeriodic.Create(() => {
-            if (displayHealth > 0.01f) {
-                if (displayHealth > Health + 0.01f) {
-                    // Debug.Log("Health: " + Health + " / " + displayHealth + " / " + MaxHealth);
-                    displayHealth -= .01f;
-                    healthDisplay.SetHealth(2 * (displayHealth / MaxHealth));
-                }
+        // FunctionPeriodic.Create(() => {
+        //     if (displayHealth > 0.01f) {
+        //         if (displayHealth > Health + 0.01f) {
+        //             // Debug.Log("Health: " + Health + " / " + displayHealth + " / " + MaxHealth);
+        //             displayHealth -= .01f;
+        //             healthDisplay.SetHealth(2 * (displayHealth / MaxHealth));
+        //         }
                
-                // At 30% health
-                if (displayHealth / MaxHealth < .3f) {
-                    if ((int)((displayHealth / MaxHealth) * 100f) % 3 == 0) {
-                        Debug.Log(" d-d " + displayHealth);
-                        healthDisplay.SetColor(Color.white);
-                    }
-                    else {
-                        Debug.Log(displayHealth);
-                        healthDisplay.SetColor(Color.red);
-                    }
-                }
-                // At 60% health
-                else if (displayHealth / MaxHealth < .6f) {
-                    healthDisplay.SetColor(Color.red);
-                }
-            }
-        }, .05f);
+        //         // At 30% health
+        //         if (displayHealth / MaxHealth < .3f) {
+        //             if ((int)((displayHealth / MaxHealth) * 100f) % 3 == 0) {
+        //                 Debug.Log(" d-d " + displayHealth);
+        //                 healthDisplay.SetColor(Color.white);
+        //             }
+        //             else {
+        //                 Debug.Log(displayHealth);
+        //                 healthDisplay.SetColor(Color.red);
+        //             }
+        //         }
+        //         // At 60% health
+        //         else if (displayHealth / MaxHealth < .6f) {
+        //             healthDisplay.SetColor(Color.red);
+        //         }
+        //     }
+        // }, .05f);
     }
 }
