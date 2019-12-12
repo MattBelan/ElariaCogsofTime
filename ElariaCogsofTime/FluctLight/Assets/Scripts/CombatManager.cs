@@ -66,7 +66,8 @@ public class CombatManager : MonoBehaviour {
 
     public float delayTimer;
 
-
+    //Loot/Inventory
+    public List<Equipment> inventory;
 
     void Awake()
     {
@@ -91,6 +92,9 @@ public class CombatManager : MonoBehaviour {
 
         // Stats
         player.Health = 20;
+
+        //Inventory
+        inventory = new List<Equipment>();
         
         // Scene Management
         if (PlayerPrefs.GetInt("Loading") > 0) {
@@ -171,6 +175,10 @@ public class CombatManager : MonoBehaviour {
         if (enemies.Count <= 0) {
             if(SceneManager.GetActiveScene().name == "Dungeon_Level1") {
                 SceneManager.LoadScene("Dungeon_Level2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Dungeon_Level2")
+            {
+                SceneManager.LoadScene("Dungeon_Level3");
             }
             else {
                 SceneManager.LoadScene("MainMenu");
@@ -277,17 +285,25 @@ public class CombatManager : MonoBehaviour {
                 {
                     case TurnState.Character: {
                             // Space for any preliminary turn logic we want to add
-                            if (!enemies[curEnemyIndex].IsAlive)
+                            if (curEnemyIndex < enemies.Count) 
                             {
-                                deadEnemies.Add(enemies[curEnemyIndex]);
-                                enemies.Remove(enemies[curEnemyIndex]);
-                            }
+                                if (!enemies[curEnemyIndex].IsAlive)
+                                {
+                                    deadEnemies.Add(enemies[curEnemyIndex]);
+                                    enemies.Remove(enemies[curEnemyIndex]);
+                                }
 
-                        cam.SetTarget(enemies[curEnemyIndex].gameObject);
-                        // Debug.Log("Enemy " + curEnemyIndex + " deciding");
-                        targetEnemy = enemies[curEnemyIndex];
-                        displayStart = true;
-                        turnPhase = TurnState.Action;
+                                    cam.SetTarget(enemies[curEnemyIndex].gameObject);
+                                // Debug.Log("Enemy " + curEnemyIndex + " deciding");
+                                targetEnemy = enemies[curEnemyIndex];
+                                displayStart = true;
+                                turnPhase = TurnState.Action;
+                            }
+                            else
+                            {
+                                turnPhase = TurnState.Result;
+                            }
+                            
                         break;
                     }
                     case TurnState.Action: {
@@ -662,7 +678,6 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    
     public void SelectNextPC()
     {
         curPlayerIndex = playerCharacters.IndexOf(player);
@@ -680,4 +695,8 @@ public class CombatManager : MonoBehaviour {
         player.Dodge();
     }
     
+    public void DisplayInventory()
+    {
+
+    }
 }

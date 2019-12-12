@@ -10,6 +10,7 @@ public class EnemyScript : CombatEntity {
     //MAKE THIS A LIST
     public List<PlayerScript> players;
     public PlayerScript target;
+    public List<Equipment> potentialDrops;
 
     // Use this for initialization
     public override void Start () 
@@ -251,5 +252,17 @@ public class EnemyScript : CombatEntity {
         }
 
         return animation;
+    }
+
+    public Equipment LootDrop()
+    {
+        if(UnityEngine.Random.Range(0.0f, 100.0f) < 25)
+        {
+            return potentialDrops[(int)UnityEngine.Random.Range(0.0f, potentialDrops.Count - 1)];
+        }
+        else
+        {
+            return null;
+        }
     }
 }
