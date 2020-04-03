@@ -1,27 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HighlightScript : MonoBehaviour {
 
 	private SpriteRenderer sr;
 	private Color clr;
-	private float dir;
+	public float incrementVal;
+	public float startAlpha = 0.25f;
+	public float minAlpha = 0.05f;
+	public float maxAlpha = 0.45f;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		sr = this.GetComponent<SpriteRenderer>();
 		clr = Color.white;
-		clr.a = 0.25f;
-		dir = -0.01f; // Increment val
+		clr.a = startAlpha;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (clr.a <= 0.05f || clr.a >= 0.45f) {
-			dir *= -1;
+	void Update () 
+	{
+		if (clr.a <= minAlpha || clr.a >= maxAlpha) {
+			incrementVal *= -1;
 		}
-		clr.a += dir;
+		clr.a += incrementVal;
 		sr.color = clr;
+	}
+
+	// Set values
+	public void SetPulsateValues(float pStartAlpha = 0.25f, float pMinAlpha = 0.05f, float pMaxAlpha = 0.45f)
+	{
+		startAlpha = pStartAlpha;
+		minAlpha = pMinAlpha;
+		maxAlpha = pMaxAlpha;
 	}
 }

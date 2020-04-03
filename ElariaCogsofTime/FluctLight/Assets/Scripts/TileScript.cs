@@ -1,48 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using UnityEngine;
 
-public class TileScript : MonoBehaviour {
+public class TileScript : MonoBehaviour 
+{
+    // External Refs
+    // -----------------
+    [HideInInspector]
+    public CombatManager combatManager;
 
-    GameObject player;
-    PlayerScript ps;
+    // Tile Info
+    // -------------
     public GameObject onTile;
-    CombatManager cm;
+    public string tileInfo;
 
-    void Awake()
+
+    public void OnMouseEnter () 
     {
-        player = GameObject.FindWithTag("Player");
-        ps = player.GetComponent<PlayerScript>();
-        cm = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
+        PlayerScript playerEntity = combatManager.player; 
+        if (!combatManager.IsPlaying)
+            return;
+
+        if (onTile)
+        {
+            // Selector
+            if (!combatManager.activeSelector && combatManager.playerCharacters[combatManager.curPlayerIndex].intendedAction == ActionIntent.Attack)
+                combatManager.activeSelector = Instantiate(combatManager.selectorPrefabs[1], gameObject.transform.position, gameObject.transform.rotation);
+
+            if (onTile.GetComponent<CombatEntity>()) 
+            {
+                CombatEntity entity = onTile.GetComponent<CombatEntity>();
+                entity.MouseHover();
+            }
+        }
+        else
+        {
+            if (combatManager.playerCharacters[combatManager.curPlayerIndex].intendedAction == ActionIntent.Move)
+            {
+                // Clear view, then render new view
+                combatManager.ResetMovementPreview();
+                
+                // Selector
+                if (!combatManager.activeSelector)
+                    combatManager.activeSelector = Instantiate(combatManager.selectorPrefabs[0], gameObject.transform.position, gameObject.transform.rotation);
+
+                // If the tile isn't occupied, show movement preview
+                playerEntity.path = playerEntity.PreviewMovement(this);
+                combatManager.GenerateArrows(playerEntity.path);
+            }
+        }   
     }
 
-	// Use this for initialization
-	void Start () {
-        Destroy(this.GetComponent<MeshFilter>());
-        Destroy(this.GetComponent<MeshRenderer>());
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        //highlighted = false;
-        ps = cm.player;
-        player = cm.player.gameObject;
-		
-	}
-
-    void OnMouseOver()
+    public void OnMouseOver ()
     {
-        ps.setHighlightPos(this.transform.position);
-        ps.resetSelector();
-
+        if (onTile)
+        {
+            if (onTile.GetComponent<CombatEntity>()) 
+            {
+                CombatEntity entity = onTile.GetComponent<CombatEntity>();
+                entity.MouseHover();
+            }
+        }
+        
         // Button press
         if (Input.GetMouseButtonDown(0))
         {
-            if (ps.Moving)
-            {
-                ps.MovePlayerTo(this);
-            }
+            PlayerScript playerScript = combatManager.player;
+
+            if (!this.onTile)
+                playerScript.MoveTo(this);
         }
     }
 }

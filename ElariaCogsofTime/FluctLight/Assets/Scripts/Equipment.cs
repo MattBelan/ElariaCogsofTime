@@ -27,11 +27,11 @@ public class Equipment : MonoBehaviour
             switch (type)
             {
                 case "armor":
-                    player.armor -= value;
+                    player.armorStat -= value;
                     break;
 
                 case "weapon":
-                    player.damage -= value;
+                    player.damageStat -= value;
                     break;
 
                 default:
@@ -44,11 +44,11 @@ public class Equipment : MonoBehaviour
             switch (type)
             {
                 case "armor":
-                    player.armor += value;
+                    player.armorStat += value;
                     break;
 
                 case "weapon":
-                    player.damage += value;
+                    player.damageStat += value;
                     break;
 
                 default:

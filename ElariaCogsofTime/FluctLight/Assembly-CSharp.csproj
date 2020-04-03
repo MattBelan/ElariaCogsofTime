@@ -55,122 +55,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineCollider.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineConfiner.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineDollyCart.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineExternalCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineFollowZoom.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineFreeLook.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineMixingCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachinePath.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachinePipeline.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineSmoother.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineSmoothPath.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineStateDrivenCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineTargetGroup.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineVirtualCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineBasicMultiChannelPerlin.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineComposer.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineFramingTransposer.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineGroupComposer.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineHardLockToTarget.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineHardLookAt.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineOrbitalTransposer.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachinePOV.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineSameAsFollowObject.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineTrackedDolly.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Components\CinemachineTransposer.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\AxisState.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CameraState.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineBlend.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineBlenderSettings.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineComponentBase.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineCore.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineDebugLogger.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineExtension.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachinePathBase.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachinePropertyAttribute.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\CinemachineVirtualCameraBase.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\GaussianFilter.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\ICinemachineCamera.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\ICinemachineComponent.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\LensSettings.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\NoiseSettings.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\Predictor.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\ReflectionHelpers.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\SplineHelpers.cs" />
-     <Compile Include="Assets\Cinemachine\Base\Runtime\Core\UnityVectorExtensions.cs" />
-     <Compile Include="Assets\Cinemachine\PostFX\CinemachinePostFX.cs" />
-     <Compile Include="Assets\Cinemachine\PostFX\CinemachinePostProcessing.cs" />
-     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
-     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
-     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
-     <Compile Include="Assets\CinemachineExamples\Scenes\Scripting\ScriptingExample.cs" />
-     <Compile Include="Assets\CinemachineExamples\Scenes\Trigger volumes\GenericTrigger.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Models\UnityCharacter\Scripts\CharacterMovement.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Models\UnityCharacter\Scripts\CharacterMovement2D.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateCamera.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateCameraWithDistance.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateCamOnPlay.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateObject.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateTimeline.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ExampleHelpWindow.cs" />
-     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
-     <Compile Include="Assets\CodeMonkey\Assets.cs" />
-     <Compile Include="Assets\CodeMonkey\CMDebug.cs" />
-     <Compile Include="Assets\CodeMonkey\MonoBehaviours\CameraFollow.cs" />
-     <Compile Include="Assets\CodeMonkey\MonoBehaviours\CameraFollowSetup.cs" />
-     <Compile Include="Assets\CodeMonkey\MonoBehaviours\ComponentActions.cs" />
-     <Compile Include="Assets\CodeMonkey\MonoBehaviours\PositionRendererSorter.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\Button_Sprite.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\Button_UI.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\FunctionPeriodic.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\FunctionTimer.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\FunctionUpdater.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\UI_Bar.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\UI_BarMultiple.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\UI_Sprite.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\UI_TextComplex.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\UtilsClass.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\World_Bar.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\World_Mesh.cs" />
-     <Compile Include="Assets\CodeMonkey\Utils\World_Sprite.cs" />
      <Compile Include="Assets\Scripts\Animation\AnimationFunctions.cs" />
      <Compile Include="Assets\Scripts\Animation\AnimationItem.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\CombatEntity.cs" />
+     <Compile Include="Assets\Scripts\CombatEntities\CombatEntity.cs" />
+     <Compile Include="Assets\Scripts\CombatEntities\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\CombatEntities\FighterScript.cs" />
+     <Compile Include="Assets\Scripts\CombatEntities\MageScript.cs" />
+     <Compile Include="Assets\Scripts\CombatEntities\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\CombatManager.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\EnemyDisplay.cs" />
-     <Compile Include="Assets\Scripts\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\Entity.cs" />
      <Compile Include="Assets\Scripts\Equipment.cs" />
-     <Compile Include="Assets\Scripts\FighterScript.cs" />
+     <Compile Include="Assets\Scripts\ErrorHandler.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GridVertex.cs" />
      <Compile Include="Assets\Scripts\HighlightScript.cs" />
      <Compile Include="Assets\Scripts\Interactible.cs" />
      <Compile Include="Assets\Scripts\InteractibleScript.cs" />
-     <Compile Include="Assets\Scripts\MageScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\MovementGridScript.cs" />
      <Compile Include="Assets\Scripts\OverworldPlayer.cs" />
-     <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\SaveData.cs" />
      <Compile Include="Assets\Scripts\SaveScript.cs" />
      <Compile Include="Assets\Scripts\TileScript.cs" />
      <Compile Include="Assets\Scripts\UI\AttackPanelScript.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\UI\HighlightSelectors.cs" />
+     <Compile Include="Assets\Scripts\UI\MovementArrows.cs" />
+     <Compile Include="Assets\Scripts\UI\MovementSelector.cs" />
      <Compile Include="Assets\Scripts\UI\UIFader.cs" />
-     <None Include="Assets\CodeMonkey\README.txt" />
-     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
- <Reference Include="com.unity.multiplayer-hlapi.Editor">
- <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+ <Reference Include="Unity.2D.PixelPerfect.Editor">
+ <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -181,11 +101,11 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
- <Reference Include="com.unity.multiplayer-weaver.Editor">
- <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.PixelPerfect">
+ <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
@@ -201,9 +121,6 @@
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
  <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>C:/Users/smart/OneDrive/Documents/School/RIT/GDD Production Studio/ElariaCogsofTime/ElariaCogsofTime/FluctLight/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

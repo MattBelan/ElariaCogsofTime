@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 /*
  * ----- Game Manager Class -----
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     #region Menus
 
     // Pause Menus
+    [Header("Pause Menus")]
     public Canvas pauseMenu;
     public Canvas combatPauseMenu;
     public Canvas cutScenePauseMenu;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     #region Miscellaneous
 
     // Game State
+    [Header("Game State")]
     public bool isPlaying;
     public bool isCombatActive;
     public bool isCombatInitiated;
@@ -46,28 +49,27 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
-    void Awake() 
+    void Awake () 
     {
-        combatManager = this.gameObject.GetComponent<CombatManager>();
+        //pauseMenu = AssetDatabase.LoadAssetAtPath("path", typeof(GameObject)) as Canvas;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         isPlaying = false;   
-        isCombatActive = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        isCombatActive = true;
         
     }
 
-    // Special Update Handled through Game Manager
-    void Update()
+    // Start is called before the first frame update
+    void Start ()
     {
-        playerScript.playing = isPlaying;
+        combatManager.IsPlaying = true;
+    }
 
+    // Special Update Handled through Game Manager
+    void Update ()
+    {
         if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Escape))
         {
-            TogglePause();
+            //TogglePause();
         }
 
 
@@ -90,11 +92,9 @@ public class GameManager : MonoBehaviour
         {
             if (!isPlaying) 
             {
-                // Disable Combat Manager's Update
             } 
             else 
             {
-                // Enable Combat Manager's Update
             }
         }
     }

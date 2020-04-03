@@ -87,7 +87,7 @@ public class SaveScript : MonoBehaviour {
         player.transform.position = newPos;
 
         player.Health = playerData.health;
-        player.currentMove = playerData.currentMove;
+        player.CurrentStepsTaken = playerData.currentMove;
     }
 
     public void LoadEnemies()
@@ -103,7 +103,7 @@ public class SaveScript : MonoBehaviour {
 
             enemies[i].transform.position = newPos;
             enemies[i].Health = enemyData[i].health;
-            enemies[i].currentMove = enemyData[i].currentMove;
+            enemies[i].CurrentStepsTaken = enemyData[i].currentMove;
         }
     }
 

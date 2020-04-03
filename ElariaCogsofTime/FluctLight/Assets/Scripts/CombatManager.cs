@@ -1,45 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+// Round and Turn Enums;
+/// <summary> The current turn within a round of combat </summary>
 public enum RoundState { Player, Enemy, Reset }
+/// <summary> Current action in the turn </summary>
 public enum TurnState { Character, Action, Display, Result }
+public enum ActionIntent { Attack, Move, Pass, Deciding }
 
-public enum ActionIntent {
-    Attack,
-    Move,
-    Pass,
-    Deciding,
-}
+public class CombatManager : MonoBehaviour 
+{
+    public RoundState Round { get; set; }
+    public bool IsPlaying;
 
-public class CombatManager : MonoBehaviour {
+    public TurnState TurnPhase;
 
-    /// <summary>
-    /// The current state of combat
-    /// </summary>
-    public RoundState roundState { get; set; }
-
-    /// <summary>
-    /// Current action in the turn
-    /// </summary>
-    TurnState turnPhase;
+    private ErrorHandler Error;
 
     public Canvas mainOverlayCanvas;
+    public Canvas attackPanelCanvas;
     public Canvas combatLogCanvas;
 
-    // Attack Panel Canvas
-    public Canvas attackPanelCanvas;
     public Text playerPanelHealth;
     public Text enemyPanelHealth;
 
     public Button[] buttons;
+    public GameObject tempArrow;
     public Canvas pauseMenu;
 
     public SaveScript saving;
-    
     public PlayerScript player;
+    public MovementGridScript gridScript;
     public AnimationFunctions anims;
     public List<PlayerScript> playerCharacters;
     public List<PlayerScript> deadPlayerCharacters;
@@ -66,22 +60,46 @@ public class CombatManager : MonoBehaviour {
 
     public float delayTimer;
 
-    //Loot/Inventory
-    public List<Equipment> inventory;
+    public List<GameObject> UIMovementPreview;
+    private MovementArrows movementArrow;
+
+    [HideInInspector]
+    public GameObject activeSelector;
+    
+    // Prefabs
+    // UI Assets
+    [HideInInspector]
+    public GameObject[] selectorPrefabs, pingPrefabs, tileHighlightPrefabs;
+    
+    // Game Logic Prefabs
+    [HideInInspector]
+    public GameObject tilePrefabs;
+
 
     void Awake()
+    {
+        // Get necessary assets from resources folder
+        LoadResources();
+
+        // Set up grid
+        gridScript.combatManager = this;
+        gridScript.Setup();
+        
+        attackPanelCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+    }
+
+	// Use this for initialization
+	void Start () 
     {
         // Play state
         delayTimer = 0.5f;
         // - player
-        playing = false;
-        playerPassTurn = false;
+        playing = playerPassTurn = false;
         curPlayerIndex = playerCharacters.IndexOf(player);
         // - enemy
-        enemiesMoved = false;
-        enemiesMoving = false;
-        enemiesAttacking = false;
-        enemiesAttacked = false;
+        enemiesMoved = enemiesMoving = false;
+        enemiesAttacking = enemiesAttacked = false;
         curEnemyIndex = 0;
 
         // Panel Display
@@ -92,50 +110,26 @@ public class CombatManager : MonoBehaviour {
 
         // Stats
         player.Health = 20;
-
-        //Inventory
-        inventory = new List<Equipment>();
-        
-        // Scene Management
-        if (PlayerPrefs.GetInt("Loading") > 0) {
-            //saving.LoadGame();
-            if (player.curLevel == 1 && SceneManager.GetActiveScene().name != "Dungeon_Level1") {
-                SceneManager.LoadScene("Dungeon_Level1");
-            }
-            else if (player.curLevel == 2 && SceneManager.GetActiveScene().name != "Dungeon_Level2") {
-                SceneManager.LoadScene("Dungeon_Level2");
-            }
-            PlayerPrefs.SetInt("Loading", 0);
-            PlayerPrefs.Save();
-        }
-    }
-
-	// Use this for initialization
-	void Start () 
-    {
-        // Scene Transitioning
-        if (SceneManager.GetActiveScene().name == "Dungeon_Level1") {
-            player.curLevel = 1;
-        }
-        else {
-            player.curLevel = 2;
-        }
         
         // Camera
         cam.SetTarget(player.gameObject);
 
         // Round & Turn States
-        roundState = RoundState.Player;
-        turnPhase = TurnState.Character;
+        Round = RoundState.Player;
+        TurnPhase = TurnState.Character;
 
         // Attack Panel Display Canvas
-        attackPanelCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        attackPanelCanvas.sortingLayerName = "Menus";
+        
+        attackPanelCanvas.sortingLayerName = "UI";
         attackPanelCanvas.enabled = false;
 
         Text[] tempArr = attackPanelCanvas.GetComponentsInChildren<Text>();
         playerPanelHealth = tempArr[0];
         enemyPanelHealth = tempArr[0];
+
+        
+
+        
 
         foreach (Text obj in tempArr)
         {
@@ -152,13 +146,14 @@ public class CombatManager : MonoBehaviour {
 	void Update() 
     {
         // Check if there are any surviving player characters
-        if (playerCharacters.Count == 0) {
+        if (playerCharacters.Count == 0)
+        {
             SceneManager.LoadScene("MainMenu");
         } 
-        else if (curPlayerIndex < playerCharacters.Count) {
+        else if (curPlayerIndex < playerCharacters.Count)
+        {
             player = playerCharacters[curPlayerIndex];
         }
-        player.playing = playing;
 
         if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Escape))
         {
@@ -194,28 +189,28 @@ public class CombatManager : MonoBehaviour {
             return;
         }
 
-        if (Input.GetButtonDown("Swap Characters") && roundState == RoundState.Player)
+        if (Input.GetButtonDown("Swap Characters") && Round == RoundState.Player)
         {
             SelectNextPC();
             //curPlayerIndex = playerCharacters.IndexOf(player);
         }
 
-        player.playerHealth.text = "Player Health: " + player.Health;
-        player.playerMoves.text = "Player Moves: " + (player.moveTotal - player.currentMove - 1);
+        //player.playerHealth.text = "Player Health: " + player.Health;
+        //player.playerMoves.text = "Player Moves: " + (player.moveTotal - player.currentMove - 1);
 
         // -- ROUND STATES
-        switch (roundState) 
+        switch (Round) 
         {
             case RoundState.Player:
                 // -- PLAYER TURN STATES
-                switch (turnPhase) 
+                switch (TurnPhase) 
                 {
                     case TurnState.Character: {
                         // Room for pre-action state logic here
                         cam.SetTarget(player.gameObject);
                         player = playerCharacters[curPlayerIndex];
                         displayStart = true;
-                        turnPhase = TurnState.Action;
+                        TurnPhase = TurnState.Action;
                         // Debug.Log("Health Values:");
                         // foreach (CombatEntity player in playerCharacters) 
                         // {   
@@ -229,14 +224,15 @@ public class CombatManager : MonoBehaviour {
                     }
                     case TurnState.Action: {
                         
-                        if (player.turnTaken) {
-                            turnPhase = TurnState.Result;
+                        if (player.IsTurnTaken) {
+                            TurnPhase = TurnState.Result;
                         }
                         break;
                     }
                     case TurnState.Display: {
 
                         DisplayPanelStart(player, targetEnemy, true);
+                        attackPanelCanvas.sortingOrder = 10;
                         
                         // Decrement timer
                         attackDisplayTime -= Time.deltaTime;
@@ -252,8 +248,10 @@ public class CombatManager : MonoBehaviour {
                                 deadEnemies.Add(target);
                                 enemies.Remove(target);
                             }
-                            turnPhase = TurnState.Action;
+                            TurnPhase = TurnState.Action;
+                            attackPanelCanvas.sortingOrder = -10;
                         }
+                        
                         break;
                     }
                     case TurnState.Result: {
@@ -261,19 +259,19 @@ public class CombatManager : MonoBehaviour {
                         bool playerTurnsFinished = true;
                         foreach (PlayerScript character in playerCharacters) 
                         {
-                            if (!character.turnTaken)
+                            if (!character.IsTurnTaken)
                                 playerTurnsFinished = false;
                         }
 
                         // If so, then enemies may go. Otherwise, auto switch to the next player character
                         if (playerTurnsFinished) {
-                            roundState = RoundState.Enemy;
+                            Round = RoundState.Enemy;
                         } 
                         else {
                             SelectNextPC();
                         }
                         delayTimer = 1.0f;
-                        turnPhase = TurnState.Character;
+                        TurnPhase = TurnState.Character;
                         break;
                     }
                 }
@@ -281,7 +279,7 @@ public class CombatManager : MonoBehaviour {
 
             case RoundState.Enemy:
                 // -- ENEMY TURN STATES
-                switch (turnPhase) 
+                switch (TurnPhase) 
                 {
                     case TurnState.Character: {
                             // Space for any preliminary turn logic we want to add
@@ -297,11 +295,11 @@ public class CombatManager : MonoBehaviour {
                                 // Debug.Log("Enemy " + curEnemyIndex + " deciding");
                                 targetEnemy = enemies[curEnemyIndex];
                                 displayStart = true;
-                                turnPhase = TurnState.Action;
+                                TurnPhase = TurnState.Action;
                             }
                             else
                             {
-                                turnPhase = TurnState.Result;
+                                TurnPhase = TurnState.Result;
                             }
                             
                         break;
@@ -310,7 +308,7 @@ public class CombatManager : MonoBehaviour {
 
                         targetEnemy.AIMove();
                         if (!targetEnemy.IsLerping) {
-                            turnPhase = (targetEnemy.IsWithinRange(targetEnemy.target, targetEnemy.range))
+                            TurnPhase = (targetEnemy.IsWithinRange(targetEnemy.target, targetEnemy.movementRangeStat))
                                 ? TurnState.Display 
                                 : TurnState.Result;
                         }
@@ -319,6 +317,7 @@ public class CombatManager : MonoBehaviour {
                     case TurnState.Display: {
                         // Setup Panel (boolean determines whether or not we are showing a player attack or enemy attack)
                         DisplayPanelStart(targetEnemy.target, targetEnemy, false); 
+                        attackPanelCanvas.sortingOrder = 10;
                         
                         // Decrement timer
                         attackDisplayTime -= Time.deltaTime;
@@ -335,7 +334,8 @@ public class CombatManager : MonoBehaviour {
                                 playerCharacters.Remove(target);
                                 curPlayerIndex = playerCharacters.Count > 0 ? curPlayerIndex - 1 : 0;
                             }
-                            turnPhase = TurnState.Result;
+                            TurnPhase = TurnState.Result;
+                            attackPanelCanvas.sortingOrder = -10;
                         }
                         break;
                     }
@@ -343,11 +343,11 @@ public class CombatManager : MonoBehaviour {
 
                         curEnemyIndex++;
                         if (curEnemyIndex >= enemies.Count) {
-                            roundState = RoundState.Reset;
+                            Round = RoundState.Reset;
                             break;
                         }
                         delayTimer = 1.0f;
-                        turnPhase = TurnState.Character;
+                        TurnPhase = TurnState.Character;
                         break;
                     }
                 };  
@@ -357,11 +357,11 @@ public class CombatManager : MonoBehaviour {
                 // Reset Player Values
                 foreach (PlayerScript p in playerCharacters)
                 {
-                    p.Moving = false;
-                    p.usedAttack = false;
-                    p.turnTaken = false;
-                    p.currentMove = 0;
-                    p.dodge = p.startDodge;
+                    p.IsMoving = false;
+                    p.UsedAttack = false;
+                    p.IsTurnTaken = false;
+                    p.CurrentStepsTaken = 0;
+                    //p.dodge = p.startDodge;
                     p.abilityCooldown -= 1;
                     curPlayerIndex = 0;
                 }
@@ -371,36 +371,34 @@ public class CombatManager : MonoBehaviour {
                 enemiesMoving = false;
                 enemiesAttacking = true;
 
-                roundState = RoundState.Player;
+                Round = RoundState.Player;
                 break;
         }
         
         // Disabling/Enabling Action Buttons
         // Move
-        if (player.moveTotal - player.currentMove - 1 == 0) {
+        if (player.movementRangeStat - player.CurrentStepsTaken - 1 == 0) {
             buttons[0].interactable = false;
         }
         else {
             buttons[0].interactable = true;
         }
         // Attack
-        if (player.usedAttack) {
-            buttons[1].interactable = false;
-            buttons[3].interactable = false;
+        if (player.UsedAttack) {
+            buttons[1].interactable = buttons[3].interactable = false;
         }
         else {
-            buttons[1].interactable = true;
-            buttons[3].interactable = true;
+            buttons[1].interactable = buttons[3].interactable = true;
         }
         // Pass
-        if (turnPhase == TurnState.Character) {
+        if (TurnPhase == TurnState.Character) {
             buttons[2].interactable = false;
         }
         else {
             buttons[2].interactable = true;
         }
         //Ability
-        if (player.usedAbility)
+        if (false)
         {
             buttons[4].interactable = false;
         }
@@ -537,7 +535,7 @@ public class CombatManager : MonoBehaviour {
                 " / " + 
                 FormatHealthValue((int) pEnemy.MaxHealth);
 
-            if (dynamicVal > pEnemy.Health - pPlayer.damage) {
+            if (dynamicVal > pEnemy.Health - pPlayer.damageStat) {
                 attackPanelCanvas.GetComponentInChildren<AttackPanelScript>().dynamicHealthVal--;
             } 
         }
@@ -547,7 +545,7 @@ public class CombatManager : MonoBehaviour {
                 " / " + 
                 FormatHealthValue((int) pPlayer.MaxHealth);
 
-            if (dynamicVal > pPlayer.Health - pEnemy.damage) {
+            if (dynamicVal > pPlayer.Health - pEnemy.damageStat) {
                 attackPanelCanvas.GetComponentInChildren<AttackPanelScript>().dynamicHealthVal--;
             }
         }
@@ -564,6 +562,157 @@ public class CombatManager : MonoBehaviour {
         return value.ToString();
     }
 
+    public void ResetMovementPreview()
+    {
+        Destroy(activeSelector);
+        activeSelector = null;
+
+        int size = UIMovementPreview.Count;
+        for (int i = size - 1; i >= 0; i--) {
+            if (UIMovementPreview[i]) {
+                GameObject tempRef = UIMovementPreview[i];
+                UIMovementPreview.RemoveAt(i);
+                Destroy(tempRef);
+            }
+        }
+    }
+
+    public void GenerateArrows(List<GridVertex> list)
+    {
+        // Exit, if the list has no value or is empty
+        if (list == null || list.Count == 0) 
+        {
+            Error.MovePreviewEmptyError();
+            return;
+        }
+
+        // Loop through list and show appropriate the appropriate arrow
+        for (int i = 0; i < list.Count - 1; i++) 
+        {
+            // Smart Values
+            Vector3 prevPos = list[(i >= 1) ? i - 1 : i].vertPos;
+            Vector3 thisPos = list[i].vertPos;
+            Vector3 nextPos = list[(i < list.Count - 1) ? i + 1 : i].vertPos;
+
+            // Instantiate arrow object
+            GameObject arrow = new GameObject("dirArrow");
+            arrow.transform.position = thisPos;
+
+            // Add components
+            SpriteRenderer renderer = arrow.AddComponent<SpriteRenderer>();
+            Color color = renderer.color;
+            color.a = 0.9f;
+
+            renderer.color = color;
+            renderer.sortingLayerName = "Arrows";
+            renderer.sortingOrder = 10;
+            UIMovementPreview.Add(arrow); //Can do this here because we still have the ref
+            
+            // Set empty sprite to appropriate arrow sprite
+            if (list.Count == 2) 
+            {
+                // Small arrow 'nubs'
+                if (i == 0) 
+                {
+                    if (thisPos.x > prevPos.x) 
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_1"]; //Pointing Right
+                    else if (thisPos.x < prevPos.x)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_3"]; //Pointing Left
+                    else if (thisPos.y > prevPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_0"]; //Pointing Up
+                    else if (thisPos.y < prevPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_2"]; //Pointing Down
+                }
+            }
+            else if (list.Count > 2)
+            {
+                // 'Nub' start
+                if (i == 0)
+                {
+                    if (thisPos.x > prevPos.x) 
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_5"]; //Pointing Right
+                    else if (thisPos.x < prevPos.x)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_7"]; //Pointing Left
+                    else if (thisPos.y > prevPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_4"]; //Pointing Up
+                    else if (thisPos.y < prevPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_6"]; //Pointing Down
+                }
+
+                // Last positions (finishes)
+                if (i == list.Count - 2) 
+                {
+                    // Straight finishes (i + 1 is NextPos and i - 1 is PrevPos)
+                    if (prevPos.x == nextPos.x && prevPos.y > nextPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_10"]; //Pointing Down 
+                    else if (prevPos.x == nextPos.x && prevPos.y < nextPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_8"]; //Pointing Up
+                    else if (prevPos.y == nextPos.y && prevPos.x > nextPos.x)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_11"]; //Pointing Left
+                    else if (prevPos.y == nextPos.y && prevPos.x < nextPos.x)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_9"]; //Pointing Right
+
+                    // Corner finishes (when NextPos and PrevPos don't share an axis)
+                    else if (prevPos.x == thisPos.x)
+                    {
+                        if (prevPos.x < nextPos.x && prevPos.y < nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_18"]; //Up-Right
+                        else if (prevPos.x > nextPos.x && prevPos.y < nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_14"]; //Up-Left
+                        else if (prevPos.x < nextPos.x && prevPos.y > nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_12"]; //Down-Right
+                        else if (prevPos.x > nextPos.x && prevPos.y > nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_16"]; //Down-Left
+                    }
+                    else if (prevPos.y == thisPos.y)
+                    {
+                        if (prevPos.x < nextPos.x && prevPos.y < nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_19"]; //Right-Down
+                        else if (prevPos.x > nextPos.x && prevPos.y < nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_13"]; //Left-Down
+                        else if (prevPos.x < nextPos.x && prevPos.y > nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_15"]; //Right-Up
+                        else if (prevPos.x > nextPos.x && prevPos.y > nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_17"]; //Left-Up
+                    }
+                }
+                // Anything between start and end
+                else
+                {
+                    // Straights
+                    if (prevPos.x == thisPos.x && thisPos.x == nextPos.x)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_25"]; //Vertical straight
+                    else if (prevPos.y == thisPos.y && thisPos.y == nextPos.y)
+                        renderer.sprite = movementArrow.Arrow["ArrowSheet_24"]; //Horiz straight
+
+                    // Corners
+                    else if (prevPos.x == thisPos.x)
+                    {
+                        if (prevPos.x < nextPos.x && prevPos.y < nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_21"]; //Up-Right
+                        else if (prevPos.x > nextPos.x && prevPos.y < nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_22"]; //Up-Left
+                        else if (prevPos.x < nextPos.x && prevPos.y > nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_20"]; //Down-Right
+                        else if (prevPos.x > nextPos.x && prevPos.y > nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_23"]; //Down-Left
+                    }
+                    else if (prevPos.y == thisPos.y)
+                    {
+                        if (prevPos.x < nextPos.x && prevPos.y < nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_20"]; //Right-Down
+                        else if (prevPos.x > nextPos.x && prevPos.y < nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_23"]; //Left-Down
+                        else if (prevPos.x < nextPos.x && prevPos.y > nextPos.y) 
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_21"]; //Right-Up
+                        else if (prevPos.x > nextPos.x && prevPos.y > nextPos.y)
+                            renderer.sprite = movementArrow.Arrow["ArrowSheet_22"]; //Left-Up
+                    }
+                }
+            }
+        }
+    }
+
     public void TargetHover(EnemyScript target)
     {
         switch(player.intendedAction) 
@@ -572,16 +721,12 @@ public class CombatManager : MonoBehaviour {
 
                 if (target.IsAlive) 
                 {
-                    player.moveSelector(target.transform.position);
-                    player.setHighlightPos(target.transform.position);
-
-                    if (Input.GetMouseButtonDown(0) && !player.usedAttack && Vector3.Distance(player.transform.position, target.transform.position) <= player.range) // on mouse press
+                    if (Input.GetMouseButtonDown(0) && !player.UsedAttack && Vector3.Distance(player.transform.position, target.transform.position) <= player.movementRangeStat) // on mouse press
                     {
-                        player.setHighlightPos(new Vector3(200,200,0)); // make highlight live in Combatmanager
                         player.intendedAction = ActionIntent.Deciding;
-                        player.Attacking = true;
+                        player.IsAttacking = true;
                         targetEnemy = target;
-                        turnPhase = TurnState.Display;
+                        TurnPhase = TurnState.Display;
                     }
                 }
                 break;
@@ -591,35 +736,58 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    public void GenerateAccessibleTiles(GameObject pTarget)
+    {
+        //
+        // set target as active in combat manager
+        List<CombatEntity> entities = new List<CombatEntity>();
+        entities.AddRange(playerCharacters);
+        entities.AddRange(enemies);
+        
+        foreach (CombatEntity entity in entities)
+        {
+            if (entity.highlightTiles == null || entity.highlightTiles.Count == 0)
+                continue;
+
+            foreach (GameObject obj in entity.highlightTiles)
+                GameObject.Destroy(obj);
+
+            entity.highlightTiles.Clear();
+        }
+
+        //
+        gridScript.CreateSelectableTiles(pTarget);
+    }
+
     public void TogglePlayerMovement()
     {
         if (!player.IsLerping)
         {
-            player.Moving = !player.Moving;
+            player.IsMoving = !player.IsMoving;
 
             player.intendedAction = player.intendedAction == ActionIntent.Move
                     ? ActionIntent.Deciding
                     : ActionIntent.Move;
                     
-            if (player.intendedAction == ActionIntent.Move)
-            {
-                player.comLog[2].text = player.comLog[1].text;
-                player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = player.id + " is ready to move.";
-            }
-            else if (player.intendedAction == ActionIntent.Deciding)
-            {
-                player.comLog[2].text = player.comLog[1].text;
-                player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = player.id + " is deciding her action.";
-            }
+            // if (player.intendedAction == ActionIntent.Move)
+            // {
+            //     player.comLog[2].text = player.comLog[1].text;
+            //     player.comLog[1].text = player.comLog[0].text;
+            //     player.comLog[0].text = player.id + " is ready to move.";
+            // }
+            // else if (player.intendedAction == ActionIntent.Deciding)
+            // {
+            //     player.comLog[2].text = player.comLog[1].text;
+            //     player.comLog[1].text = player.comLog[0].text;
+            //     player.comLog[0].text = player.id + " is deciding her action.";
+            // }
         }
     }
     public void TogglePlayerPass()
     {
         if (!player.IsLerping)
         {
-            player.turnTaken = true;
+            player.IsTurnTaken = true;
 
             // player.intendedAction = player.intendedAction == ActionIntent.Move
             //     ? ActionIntent.Deciding
@@ -631,24 +799,24 @@ public class CombatManager : MonoBehaviour {
     {
         if (!player.IsLerping)
         {
-            player.Attacking = !player.Attacking;
+            player.IsAttacking = !player.IsAttacking;
 
             player.intendedAction = player.intendedAction == ActionIntent.Attack
                 ? ActionIntent.Deciding
                 : ActionIntent.Attack;
 
-            if (player.intendedAction == ActionIntent.Attack)
-            {
-                player.comLog[2].text = player.comLog[1].text;
-                player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = player.id + " is ready to attack.";
-            }
-            else if (player.intendedAction == ActionIntent.Deciding)
-            {
-                player.comLog[2].text = player.comLog[1].text;
-                player.comLog[1].text = player.comLog[0].text;
-                player.comLog[0].text = player.id + " is choosing an action.";
-            }
+            // if (player.intendedAction == ActionIntent.Attack)
+            // {
+            //     player.comLog[2].text = player.comLog[1].text;
+            //     player.comLog[1].text = player.comLog[0].text;
+            //     player.comLog[0].text = player.id + " is ready to attack.";
+            // }
+            // else if (player.intendedAction == ActionIntent.Deciding)
+            // {
+            //     player.comLog[2].text = player.comLog[1].text;
+            //     player.comLog[1].text = player.comLog[0].text;
+            //     player.comLog[0].text = player.id + " is choosing an action.";
+            // }
         }
     }
 
@@ -694,9 +862,72 @@ public class CombatManager : MonoBehaviour {
     {
         player.Dodge();
     }
-    
-    public void DisplayInventory()
-    {
 
+    // Function for storing imperative resources locally (in this script). It provides a reusuable and reliable
+    // alternative to the drag and drop method in the Unity Inspector
+    private void LoadResources ()
+    {
+        // Tile Object Prefab
+        tilePrefabs = (GameObject) Resources.Load("Prefabs/TileObjects/TileVert");
+
+        if (tilePrefabs == null)
+            Error.ResourceLoadError("Tile Object Prefab");
+        //
+
+        // Arrows
+        movementArrow = gameObject.AddComponent<MovementArrows>();
+        // Check that the arrows were loaded properly
+        if (movementArrow.Arrow == null)
+            Error.ResourceLoadError("MovementArrows");
+        //
+
+        // Selectors
+        selectorPrefabs = new GameObject[4];
+        // Movement Selector
+        selectorPrefabs[0] = (GameObject) Resources.Load("Prefabs/UI/Indication/Selector_Movement");
+        selectorPrefabs[2] = (GameObject) Resources.Load("Prefabs/UI/Indication/Selector_Movement_Invalid");
+        // Attack Selector
+        selectorPrefabs[1] = (GameObject) Resources.Load("Prefabs/UI/Indication/Selector_Attack");
+        selectorPrefabs[3] = (GameObject) Resources.Load("Prefabs/UI/Indication/Selector_Attack_Invalid");
+
+        foreach (GameObject selector in selectorPrefabs) 
+        {
+            if (selector == null)
+                Error.ResourceLoadError("UI Selectors");
+        }
+        //
+
+        // Entity Pings
+        pingPrefabs = new GameObject[6];
+        // Player
+        pingPrefabs[0] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Player");
+        pingPrefabs[1] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Player_Inactive");
+        // Neutral
+        pingPrefabs[4] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Neutral");
+        pingPrefabs[5] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Neutral_Inactive");
+        // Enemy
+        pingPrefabs[2] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Enemy");
+        pingPrefabs[3] = (GameObject) Resources.Load("Prefabs/UI/Indication/Ping_Enemy_Inactive");
+
+        foreach (GameObject ping in pingPrefabs) 
+        {
+            if (ping == null)
+                Error.ResourceLoadError("Entity Pings");
+        }
+        //
+
+        // Tile Highlights
+        tileHighlightPrefabs = new GameObject[2];
+        // Movement
+        tileHighlightPrefabs[0] = (GameObject) Resources.Load("Prefabs/UI/Indication/TileHighlight_Movement");
+        // Attack
+        tileHighlightPrefabs[1] = (GameObject) Resources.Load("Prefabs/UI/Indication/TileHighlight_Attack");
+
+        foreach (GameObject tileHighlight in tileHighlightPrefabs) 
+        {
+            if (tileHighlight == null)
+                Error.ResourceLoadError("Tile Highlight");
+        }
+        //
     }
 }

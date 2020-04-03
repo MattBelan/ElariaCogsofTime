@@ -1,31 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * ----- Grid Vertex Class -----
+ *
+ * Stores vertex data values for calculating ideal movement path for
+ * entities during combat. Contains important values such as vertex
+ * position, adjacent vertices, whether or not the vertex was visited,
+ * and heuristic values.
+ *
+ */
 
 public class GridVertex : MonoBehaviour
 {
-
-    public Vector3 vertPos;
-    public bool visited;
     public List<GridVertex> adjVertices;
+    [HideInInspector]
+    public Vector3 vertPos;
+    [HideInInspector]
+    public bool visited;
     public float heuristic;
 
-    void Awake()
+    void Awake ()
     {
         vertPos = transform.position;
-        //vertPos.z = -1;
         visited = false;
         adjVertices = new List<GridVertex>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
